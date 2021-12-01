@@ -1,0 +1,106 @@
+{% load static %}
+<div class="header-top">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="image">
+				<img src="{% static 'img/navlogo.png' %}" alt="" /></a>
+			</div>
+			<div class="col-sm-9">
+				<div class="navbar">
+					<ul class="navbar-nav">
+						{% for active,link,name in nav%}
+						  <li>
+							  <a class=" {{active}} " href=" {{link}} " title="">{{name}}</a>
+						  </li>
+					  {% endfor %}
+				  </ul>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="pull-right">
+					<ul class="navbar-nav">
+						{% if request.user.is_authenticated %}
+					    <li class="dropdown profile">
+							<a href="#">{{ request.user.username }}</a>
+					        <ul role="menu" class="sub-menu">
+					            <li><a href=""><i class="fa fa-shopping-cart"></i> My order</a></li>
+					            <li><a href="{% url 'signout' %}"><i class="fa fa-sign-out"></i> Sign Out</a></li>
+					        </ul> 
+					    </li>
+					    <li class="cart">
+					    	<a href="">Cart <i class="fa fa-angle-left"></i>
+					    		<span class="totalcart" id="gettotalcart"> - </span> 
+					    		<i class="fa fa-angle-right"></i>
+					    	</a>
+					    </li>
+					    {% else %}
+					    <li class="profile">
+							<a href="{% url 'signin' %}">Sign In</a></li>
+					    <li class="cart">
+					    	<a href="">Cart <i class="fa fa-angle-left"></i>
+					    		<span class="totalcart" id="gettotalcart"> - </span> 
+					    		<i class="fa fa-angle-right"></i>
+					    	</a>
+					    </li>
+					    {% endif %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- <nav class="navbar navbar-expand navbar-dark bg-dark">
+	<div class="container-fluid">
+    <a class="navbar-brand">
+    	<img id="logo" src="{% static logo %}">
+    </a>
+	    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      	<span class="navbar-toggler-icon"></span>
+    </button>
+	    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    <ul class="navbar-nav me-auto my-2 my-lg-0">
+	      	{% for active,link,name in nav%}
+				<li>
+					<a class=" {{active}} " href=" {{link}} " title="">{{name}}</a>
+				</li>
+			{% endfor %}
+	    </ul>
+		<form action="" method="GET">
+			<div class="input-group search_box">
+				<input type="text" class="form-control" placeholder="Cari Resources" name="q" value="">
+				<button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+			</div>
+		</form>
+
+		
+		{% if request.user.is_authenticated %}
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#">{{ request.user.username }}</a>
+				<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<li><a class="dropdown-item" href=""><i class="fa fa-shopping-cart"></i> My order </a></li>
+					<li><a class="dropdown-item" href="{% url 'signout' %}"><i class="fa fa-sign-out"></i> Sign Out </a></li>
+				</ul> 
+			</li>
+			<li class="cart">
+				<a href="">Cart <i class="fa fa-angle-left"></i>
+					<span class="totalcart" id="gettotalcart"> s </span> 
+					<i class="fa fa-angle-right"></i>
+				</a>
+			</li>
+			{% else %}
+			<li class="profile"><a href="{% url 'signin' %}"> Sign In </a></li>
+			<li class="cart">
+				<a href="">Cart <i class="fa fa-angle-left"></i>
+					<span class="totalcart" id="gettotalcart"> s </span> 
+					<i class="fa fa-angle-right"></i>
+				</a>
+			</li>
+			{% endif %}
+		
+    </div>
+	</div>
+</nav> -->
+

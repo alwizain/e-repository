@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title> {{ subjudul }} | E-repository Poltekpos</title>
+	{% block app_css %}
+		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static app_css %}">
+	{% endblock app_css %}
+	{% include "snippets/styles.html" %}
+</head>
+
+<body>
+	
+	{% include "snippets/navbar.html" %}
+	
+	{% block header %}
+	    	
+	{% endblock header %}
+
+	<br>
+
+
+	{% block content %}
+				
+	{% endblock %}
+
+	<br>
+
+	{% include "snippets/footer.html" %}
+    {% include "snippets/jscripts.html" %}
+
+</body>
+</html>
