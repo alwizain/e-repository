@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+	<div class="container-fluid">
+		<h1 class="display-3 text-center">	
+			DOKUMEN	
+		</h1>
+
+		<br>	
+
+		<div class="container">
+	
+			<table class="table table-hover">
+			  <thead>
+			    <tr>
+			      <th scope="col">#</th>
+			      <th scope="col">Nama Dokumen</th>
+			      <th scope="col"></th>
+			    </tr>
+			  </thead>
+
+			  <tbody>
+
+			  	{% for get_dokumen in data_dokumen %}
+			  		<tr>
+				      <th scope="row">{{forloop.counter}}</th>
+				      <td>{{get_dokumen.nama_dokumen}}</td>
+				      <td>
+				      	<a href="{{get_dokumen.file.url}}" download="{{get_dokumen.file.url}}">Pdf</a>
+				      </td>
+				    </tr>
+			  	{% endfor %}
+
+			  </tbody>
+
+			</table>
+		</div>
+	</div>
+
+{% endblock content %}
