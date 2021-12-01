@@ -2,26 +2,31 @@
 {% load static %}
 
 {% block header %}
-	<div class="jumbotron jumbotron-fluid">
-	  	<div class="container text-center text-white">
-			<h1 class="display-4 text-center">{{ subjudul }}</h1>
-			<p class="lead text-center">{{ deskripsi }}</p>
-		</div>
-	</div>
+	
 {% endblock header %}
 
 {% block content %}
-	<div class="container-fluid">
-		<div class="container border-top bg-white text-dark shadow" style="margin: 100px" >
-	
-			
-			<div class="row" style="height: 200px">
-	    		<br>
-				<h1>
-				   	Repository
-				</h1>
-				<p>Untuk memenuhi kebutuhan pemustaka, kami melanggan berbagai bahan perpustakaan digital online (e-Resources) seperti jurnal , ebook, dan karya-karya referensi online lainnya. Setiap anggota Perpustakaan Nasional Republik Indonesia (Perpusnas) dan telah memiliki nomor anggota yang sah, berhak memanfaatkan layanan koleksi digital online yang kami langgan (e-Resources).</p>
+<div class="jumbotron jumbotron-fluid">
+	<div class="container text-center">
+	  <img src="static/img/icon-perpustakaan.jpg" width="250" class="rounded-circle">
+		<h1 class="display-4"><b>E-REPOSITORY POLTEKPOS</b></h1><br>
+		<p class="lead"><b>Untuk memenuhi kebutuhan pemustaka, kami melanggan berbagai bahan perpustakaan digital online (e-Resources) seperti jurnal , ebook, dan karya-karya referensi online lainnya. Setiap anggota Perpustakaan Nasional Republik Indonesia (Perpusnas) dan telah memiliki nomor anggota yang sah, berhak memanfaatkan layanan koleksi digital online yang kami langgan (e-Resources).</b></p>
+		<div class="container">
+			<br>
+			<div class="row">
+				<div class="col sm-3">
+						<div class="card">
+							<a type="button" href="{% url 'get_journal' %}" class="btn btn-primary btn-lg btn-block">Baca Jurnal Sekarang</a>
+						</div>
+				</div>
+				<div class="col sm-8">
+						<div class="card">
+							<a type="button" href="..." class="btn btn-primary btn-lg btn-block">Beli Buku Sekarang</a>
+						</div>
+				</div>
 			</div>
-		</div>
+		</div>	
+	  </div>
 	</div>
+	<br><br><br>
 {% endblock content %}

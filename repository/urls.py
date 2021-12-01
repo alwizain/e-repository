@@ -34,6 +34,9 @@ urlpatterns = [
 
     #path app
     path('resources/', include('resources.urls')),
+    path('dokumen/', include('dokumen.urls')),
+    path('panduan/', include('panduan.urls')),
+    path('bantuan/', include('bantuan.urls')),
 
     #path api
     # path('api/', include(router.urls)),
