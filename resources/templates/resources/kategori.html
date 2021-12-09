@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+{% load customfunction %}
+{% block content %}
+<div class="row">
+    {% for item in buku %}
+    <div class = 'col-sm-3'>
+        <div class="book-wrapper text-center">
+            <div class="coverpage">
+                <img src="{{ item.coverpage.url }}"/>
+            </div>
+            <a href="{% url 'resources:buku' id_buku=item.id %}">{{ item.nama }}</a>
+            <a href="{% url 'resources:penulis'  id_pengarang=item.pengarang.id %}">{{ item.pengarang }}</a>
+            <div class="rating">
+                {{ item.totalrating|averagerating:item.totalreview }}
+                <span class="totalrating">{{ item.totalreview|add:-1 }}</span>
+            </div>
+            <p> {{ item.harga }} $. </p>
+            <button class="btn btn-warning" id="addTocart" data-book-id="{{ item.id }}">
+                    <i class="fa fa-shopping-cart""></i>Add to cart
+            </button>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+{% if buku|length > 0 %}
+<div class="d-pagination">
+    <ul class="pagination">
+    {% if buku.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page=1">First</a>
+        </li>								
+        <li class="page-item">
+            <a class="page-link" href="?page={{ buku.previous_page_number }}">Previous</a>
+        </li>
+    {% endif %}
+    {% for ord in buku.paginator.page_range %}
+        {% if buku.number == ord %}
+            <li class="page-item active">
+                <span class="page-link">{{ ord }}
+                    <span class="sr-only">(current)</span>
+                </span>
+            </li>
+        {% elif ord > buku.number|add:'-3' and ord < buku.number|add:'3' %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ ord }}">{{ ord }}</a>
+            </li>
+
+        {% endif %}
+
+    {% endfor %}
+     {% if buku.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ buku.next_page_number }}">Next</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ buku.paginator.num_pages }}">Last</a>
+        </li>
+    {% endif %}
+    </ul>
+</div>
+{% else %}
+<h3 class="text-center mt-5">There are no books Found.</h3>
+{% endif %}	
+
+{% endblock %}

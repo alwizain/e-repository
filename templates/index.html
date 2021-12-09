@@ -7,26 +7,40 @@
 
 {% block content %}
 <div class="jumbotron jumbotron-fluid">
-	<div class="container text-center">
-	  <img src="static/img/icon-perpustakaan.jpg" width="250" class="rounded-circle">
-		<h1 class="display-4"><b>E-REPOSITORY POLTEKPOS</b></h1><br>
-		<p class="lead"><b>Untuk memenuhi kebutuhan pemustaka, kami melanggan berbagai bahan perpustakaan digital online (e-Resources) seperti jurnal , ebook, dan karya-karya referensi online lainnya. Setiap anggota Perpustakaan Nasional Republik Indonesia (Perpusnas) dan telah memiliki nomor anggota yang sah, berhak memanfaatkan layanan koleksi digital online yang kami langgan (e-Resources).</b></p>
-		<div class="container">
-			<br>
-			<div class="row">
-				<div class="col sm-3">
-						<div class="card">
-							<a type="button" href="{% url 'get_journal' %}" class="btn btn-primary btn-lg btn-block">Baca Jurnal Sekarang</a>
+	<div class="row">
+		<div class="col-sm-2">
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item"><h5><b>Layanan</b></h5></li>
+				<li class="layanan_menu list-group-item"><a href="">Jam Operasional</a></li>
+				<li class="layanan_menu list-group-item"><a href="">Berita</a></li>
+				<li class="layanan_menu list-group-item"><a href="">Buku</a></li>
+				<li class="layanan_menu list-group-item"><a href="{% url 'journals' %}">Jurnal</a></li>
+				<li class="layanan_menu list-group-item"><a href="">Kolaborasi dengan kami</a></li>
+			</ul>
+		</div>
+
+		<div class="col-sm-10">
+			<div class="container text-center">
+				<img src="static/img/icon-perpustakaan.jpg" width="250" class="rounded-circle">
+				<h1 class="display-4"><b>E-REPOSITORY POLTEKPOS</b></h1><br>
+				<p class="lead"><b>Untuk memenuhi kebutuhan pemustaka, kami melanggan berbagai bahan perpustakaan digital online (e-Resources) seperti jurnal , ebook, dan karya-karya referensi online lainnya. Setiap anggota Perpustakaan Nasional Republik Indonesia (Perpusnas) dan telah memiliki nomor anggota yang sah, berhak memanfaatkan layanan koleksi digital online yang kami langgan (e-Resources).</b></p>
+				<div class="container">
+				<br>
+					<div class="row">
+						<div class="col sm-3">
+								<div class="card">
+									<a type="button" href="{% url 'journals' %}" class="btn btn-primary btn-lg btn-block">Baca Jurnal Sekarang</a>
+								</div>
 						</div>
-				</div>
-				<div class="col sm-8">
-						<div class="card">
-							<a type="button" href="..." class="btn btn-primary btn-lg btn-block">Beli Buku Sekarang</a>
+						<div class="col sm-8">
+								<div class="card">
+									<a type="button" href="..." class="btn btn-primary btn-lg btn-block">Beli Buku Sekarang</a>
+								</div>
 						</div>
-				</div>
+					</div>
+				</div>	
 			</div>
-		</div>	
-	  </div>
+		</div>
 	</div>
 	<br><br><br>
 {% endblock content %}
