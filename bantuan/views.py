@@ -13,7 +13,6 @@ def index(request):
 			['nav-link ', '/panduan', 'Panduan'],
 			['nav-link', '/dokumen', 'Dokumen'],
 			['nav-link active','/bantuan', 'Bantuan'],
-            ['nav-link','/journal', 'Journal'],
 		]
 	}
     return render(request,'bantuan/index.html',context)

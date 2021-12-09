@@ -7,8 +7,13 @@ from django.views.static import serve
 
 urlpatterns = [
 	path('', views.index, name='index'),
-    path('journal', views.get_journal, name="get_journal"),
+    path('journal/<int:id>', views.get_journal, name="journal"),
+	path('journals', views.get_journals, name="journals"),
 	url(r'^download/(?P<path>.*)$',serve,{'document_root':settings.MEDIA_ROOT}),
+	path('buku/<int:id>', views.get_buku, name="buku"),
+	path('bukus', views.get_bukus, name="bukus"),
+	path('kategori/(?P<id>[0-9]+)$', views.get_buku_kategori, name="kategori"),
+	path('penulis/<int:id>', views.get_pengarang, name = "pengarang"),
 ]
 
 if settings.DEBUG:

@@ -20,7 +20,9 @@
 				    {% endfor %}
 				</div>
 				{% endif %}
-				<h3> Sign In</h3>	
+				<div class="text-center">
+					<h3> Login </h3>
+				</div>	
 				<form method="POST" class="auth-validate-form">
 					{% csrf_token %}
 					<div class="form-group">
@@ -33,8 +35,8 @@
 					</div>
 					<button type="submit" class="btn btn-warning">Login</button>
 				</form>
-				<div class="a-divider-break"><h5>New to BookStore?</h5></div>
-				<a class="btn btn-default" href="{% url 'registration' %}">Create you BookStore account</a>
+				<div class="a-divider-break"><h5>New to Repository?</h5></div>
+				<a class="btn btn-default" href="{% url 'registration' %}">Create you Repository account</a>
 			</div> 
 		</div>
 	</div>
