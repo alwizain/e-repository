@@ -11,8 +11,13 @@
 .navbar ul li a{
   display: block;
   text-decoration: none;
-  padding: 0px;
+  padding: 10px;
   color: #ffffff;
+}
+
+.navbar ul li a:hover{
+  display: block;
+  color: #c19a39;
 }
 
 
@@ -175,9 +180,9 @@ ul.sub-menu {
   font-size: 13px;
   font-family: Arial, Helvetica, sans-serif;
   width: 100%;
-  background: #f0c14b; 
+  background: #232f3e; 
   margin: 8px 0;
-  border: 1px solid #c19a39;
+  border: 1px solid #232f3e;
 }
 .signin-form .btn-default{
   background: #e7e9ec;
@@ -223,6 +228,83 @@ ul.sub-menu {
 /* journal */
 .kategori_menu a{
   color:#000000;
+  text-decoration: none;
+}
+
+/* resources */
+.layanan_menu a{
+  color: #000000;
+  text-decoration: none;
+}
+
+/*=========  published books */
+.titleheader {
+  margin-top: 20px;
+  display: block;
+  text-align: center;
+}
+
+.titleheader > h3, a{
+  font-family: "Times New Roman", Times, serif;
+  display: inline-block;
+}
+
+
+.sliderzx{
+  width: 94%;
+  margin: 0 auto;
+}
+.book-wrapper{
+  max-width: 250px;
+  margin: 10px;
+  border: 1px solid #efefef;
+  padding: 10px;
+  display: inline-block;
+}
+.book-wrapper .btn{
+  width: 80%;
+  margin: auto;
+}
+.book-wrapper p{
+  color: #B12704;
+}
+.book-wrapper a{
+  display: block;
+  padding-top:5px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #0066c0;
+  text-decoration: none;
+  white-space: normal;
+  letter-spacing: normal;
+  font-size: 13px!important;
+  line-height: 19px!important;
+}
+.book-wrapper a i {
+  margin-right: 7px;
+}
+.coverpage img{
+  max-height: 200px;
+  max-width: 150px;
+  margin: auto;
+}
+.totalrating{
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #999;
+  border-radius: 10px;
+  margin-left: 6px;
+}
+.rating span{
+  font-size: 13px;
+}
+.checked {
+    color: orange;
 }
 
 /* footer */

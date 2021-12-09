@@ -37,7 +37,7 @@ urlpatterns = [
     path('dokumen/', include('dokumen.urls')),
     path('panduan/', include('panduan.urls')),
     path('bantuan/', include('bantuan.urls')),
-
+    
     #path api
     # path('api/', include(router.urls)),
     # path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))

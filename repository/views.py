@@ -18,7 +18,6 @@ def index(request):
 			['nav-link', '/panduan', 'Panduan'],
 			['nav-link', '/dokumen', 'Dokumen'],
 			['nav-link','/bantuan', 'Bantuan'],
-            ['nav-link','resources/journal', 'Journal'],
 		]
 	}
 

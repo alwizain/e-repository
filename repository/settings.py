@@ -43,6 +43,8 @@ INSTALLED_APPS = [
 
     #apps
     'resources.apps.ResourcesConfig',
+    'order.apps.OrderConfig',
+    'buku',
     'panduan',
     'dokumen',
     'bantuan',
