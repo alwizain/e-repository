@@ -3,25 +3,35 @@
 {% load customfunction %}
 {% block content %}
 <div class="row">
+    <div class="col-sm-2">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h5><b>Kategori Buku</b></h5></li>
+            {% for k in cat %}
+            <li class="kategori_menu list-group-item"><a href="{% url 'kategori' id=k.id_kategori %}">{{ k.nama_kategori }}</a></li>
+            {% endfor %}
+            
+        </ul>
+    </div>
+
+    <div class = 'col-sm-10'>
     {% for item in buku %}
-    <div class = 'col-sm-3'>
         <div class="book-wrapper text-center">
             <div class="coverpage">
-                <img src="{{ item.coverpage.url }}"/>
+                <img src="{{ item.cover.url }}"/>
             </div>
-            <a href="{% url 'resources:buku' id_buku=item.id %}">{{ item.nama }}</a>
-            <a href="{% url 'resources:penulis'  id_pengarang=item.pengarang.id %}">{{ item.pengarang }}</a>
+            <a href="{% url 'buku' id=item.id_buku %}">{{ item.jdl_buku }}</a>
+            <a href="{% url 'pengarang' id=item.pengarang.id_pengarang %}">{{ item.pengarang }}</a>
             <div class="rating">
                 {{ item.totalrating|averagerating:item.totalreview }}
                 <span class="totalrating">{{ item.totalreview|add:-1 }}</span>
             </div>
             <p> {{ item.harga }} $. </p>
-            <button class="btn btn-warning" id="addTocart" data-book-id="{{ item.id }}">
+            <button class="btn btn-warning" id="addTocart" data-book-id="{{ item.id_buku }}">
                     <i class="fa fa-shopping-cart""></i>Add to cart
             </button>
         </div>
-    </div>
     {% endfor %}
+    </div>
 
 </div>
 {% if buku|length > 0 %}

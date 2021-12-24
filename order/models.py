@@ -15,6 +15,7 @@ class Pembelian(models.Model):
 	kode_pos = models.CharField(max_length=30)
 	metode_pembayaran = models.CharField(max_length = 20)
 	nomor_akun = models.CharField(max_length = 20)
+	transaction_id = models.IntegerField()
 	payable = models.IntegerField()
 	total_buku = models.IntegerField()
 	tgl_transaksi = models.DateTimeField(auto_now_add=True)

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% load customfunction %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-2">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h5><b>Kategori Journal</b></h5></li>
+            {% for get_kategori in catj %}
+            <li class="kategori_menu list-group-item"><a href="{% url 'kategorij' id=get_kategori.id_kategorij %}">{{get_kategori.nama_kategori}}</a></li>
+            {% endfor %}
+            
+        </ul>
+    </div>
+
+    <div class="col-sm-10">
+        <h1 class="display-3 text-center">	
+            E-resources Journal	
+        </h1>
+
+        <br>
+        <div class="col-sm-4">
+            <form action="" method="GET">
+                <div class="input-group search_box">
+                    <input type="text" class="form-control" placeholder="Cari Jurnal" name="q" value="">
+                    <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
+        </div>
+
+        <div class="container">
+    
+            <table class="table table-hover">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Judul</th>
+                <th scope="col">Abstract</th>
+                <th scope="col">Pengarang</th>
+                <th scope="col"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for get_journal in journals %}
+                    <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{get_journal.jdl_jurnal}}</td>
+                    <td>{{get_journal.abstract}}</td>
+                    <td>{{get_journal.pengarang}}</td>
+                    <td>
+                        <a href="{{get_journal.file.url}}" download="{{get_journal.file.url}}">Pdf</a>
+                    </td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

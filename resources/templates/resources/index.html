@@ -12,7 +12,7 @@
 				<div class="col-sm-2">
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item"><h5><b>Resources</b></h5></li>
-						<li class="layanan_menu list-group-item"><a href="">Buku</a></li>
+						<li class="layanan_menu list-group-item"><a href="{% url 'bukus' %}">Buku</a></li>
 						<li class="layanan_menu list-group-item"><a href="{% url 'journals' %}">Jurnal</a></li>
 						
 					</ul>
@@ -35,10 +35,10 @@
 					<br><br><br><br>
 
 					<div class="titleheader">
-						<h3 class="h2header text-center">New Published Book</h3>
-						<h5 class="h5link text-center"><a href="#">See All</a></h5>
+						<h3 class="h2header text-center">Buku Terbaru</h3>
+						<h5 class="h5link text-center"><a href="{% url 'bukus' %}">See All</a></h5>
 					</div>
-					<div class="regulara sliderzx">
+					<div class="regulara sliderzx text-center">
 						{% for item in newbooks %}
 						<div class="book-wrapper text-center">
 							<div class="coverpage">
@@ -47,8 +47,8 @@
 							<a href="{% url 'buku' id=item.id_buku %}">{{ item.jdl_buku|text_short }}</a>
 							<a href="{% url 'pengarang' id=item.pengarang.id_pengarang %}">{{ item.pengarang }}</a>
 							<div class="rating">
-								
-								<span class="totalrating">-</span>
+								{{ item.totalrating|averagerating:item.totalreview }}
+								<span class="totalrating">{{ item.totalreview|add:-1 }}</span>
 							</div>
 						</div>
 						{% endfor %}
@@ -57,10 +57,10 @@
 					<br><br><br><br>
 
 					<div class="titleheader">
-						<h3 class="h2header text-center">New Published Journal</h3>
+						<h3 class="h2header text-center">Journal Terbaru</h3>
 						<h5 class="h5link text-center"><a href="#">See All</a></h5>
 					</div>
-					<div class="regulara sliderzx">
+					<div class="regulara sliderzx text-center">
 						{% for j in newjournal %}
 						<div class="book-wrapper text-center">
 							<div class="coverpage">
@@ -74,15 +74,16 @@
 					<br><br><br><br>
 
 					<div class="titleheader">
-						<h3 class="h2header text-center">Top Selling Book</h3>
+						<h3 class="h2header text-center">Buku Pilihan Pelanggan</h3>
 					</div>
-					<div class="regulara sliderzx">
-						{% for p in newbooks %}
+					<div class="regulara sliderzx text-center">
+						{% for p in ratingbuku %}
 						<div class="book-wrapper text-center">
 							<div class="coverpage">
 								<img src="{{ p.cover.url }}"/>
 							</div>
 							<a href="{% url 'buku' id=p.id_buku %}">{{ p.jdl_buku|text_short }}</a>
+							<a href="{% url 'pengarang' id=p.pengarang.id_pengarang %}">{{ p.pengarang }}</a>
 							<div class="rating">
 								{{ p.totalrating|averagerating:p.totalreview }}
 								<span class="totalrating">{{ p.totalreview|add:-1 }}</span>

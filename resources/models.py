@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class Journal(models.Model):
     kd_jurnal = models.AutoField(primary_key=True)
-    kategorij = models.ForeignKey('Kategori', on_delete = models.CASCADE)
+    kategorij = models.ForeignKey('Kategori_Journal', on_delete = models.CASCADE)
     jdl_jurnal = models.CharField(max_length=100)
     pengarang = models.CharField(max_length=100)
     terbitan = models.CharField(max_length=50)
@@ -29,6 +29,13 @@ class Pengarang(models.Model):
 
 class Kategori(models.Model):
     id_kategori = models.AutoField(primary_key=True)
+    nama_kategori = models.CharField(max_length=50)
+
+    def __str__(self):
+        return "{}".format(self.nama_kategori)
+
+class Kategori_Journal(models.Model):
+    id_kategorij = models.AutoField(primary_key=True)
     nama_kategori = models.CharField(max_length=50)
 
     def __str__(self):

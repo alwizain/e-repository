@@ -9,7 +9,7 @@
 				<div class="col-sm-2">
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item"><h5><b>Kategori Jurnal</b></h5></li>
-						{% for get_kategori in kategori %}
+						{% for get_kategori in catj %}
 						<li class="kategori_menu list-group-item"><a href="">{{get_kategori.nama_kategori}}</a></li>
 						{% endfor %}
 						
@@ -22,9 +22,9 @@
 
 					<br>
 					<div class="col-sm-4">
-						<form action="" method="GET">
+						<form action="{% url 'search' %}" method="GET">
 							<div class="input-group search_box">
-								<input type="text" class="form-control" placeholder="Cari Jurnal" name="q" value="">
+								<input type="text" class="form-control" placeholder="Cari Jurnal" name="q" value="{{search}}">
 								<button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
 							</div>
 						</form>
@@ -45,14 +45,14 @@
 
 						<tbody>
 
-							{% for get_journals in journals %}
+							{% for get_journal in journals %}
 								<tr>
 								<th scope="row">{{forloop.counter}}</th>
-								<td>{{get_journals.jdl_jurnal}}</td>
-								<td>{{get_journals.abstract}}</td>
-								<td>{{get_journals.pengarang}}</td>
+								<td>{{get_journal.jdl_jurnal}}</td>
+								<td>{{get_journal.abstract}}</td>
+								<td>{{get_journal.pengarang}}</td>
 								<td>
-									<a href="{{get_journals.file.url}}" download="{{get_journals.file.url}}">Pdf</a>
+									<a href="{{get_journal.file.url}}" download="{{get_journal.file.url}}">Pdf</a>
 								</td>
 								</tr>
 							{% endfor %}

@@ -9,10 +9,11 @@ urlpatterns = [
 	path('', views.index, name='index'),
     path('journal/<int:id>', views.get_journal, name="journal"),
 	path('journals', views.get_journals, name="journals"),
+	path('kategorij/<int:id>', views.get_journal_kategori, name="kategorij"),
 	url(r'^download/(?P<path>.*)$',serve,{'document_root':settings.MEDIA_ROOT}),
 	path('buku/<int:id>', views.get_buku, name="buku"),
 	path('bukus', views.get_bukus, name="bukus"),
-	path('kategori/(?P<id>[0-9]+)$', views.get_buku_kategori, name="kategori"),
+	path('kategori/<int:id>', views.get_buku_kategori, name="kategori"),
 	path('penulis/<int:id>', views.get_pengarang, name = "pengarang"),
 ]
 

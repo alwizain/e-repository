@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
-from .models import Journal, Buku, Kategori, Pengarang, Review
+from .models import Journal, Buku, Kategori, Kategori_Journal, Pengarang, Review
 from django.contrib import messages
 from repository.forms import ReviewForm
 
@@ -10,12 +10,14 @@ from repository.forms import ReviewForm
 def index(request):
     bukubaru = Buku.objects.order_by('-created')[:5]
     jurnalbaru = Journal.objects.order_by('-created')[:5]
+    bukubaik = Buku.objects.order_by('-totalrating')[:4]
     context = {
 		'judul' : 'Resources',
 		'subjudul' : "Resources",
 		# 'logo':'img/logo_nav.png',
         'newbooks' : bukubaru,
         'newjournal' : jurnalbaru,
+        'ratingbuku' : bukubaik,
 		'nav' : [
 			['nav-link','/', 'Home'],
 			['nav-link active', '/resources', 'Resources'],
@@ -36,9 +38,9 @@ def download(request,path):
 
 	raise Http404
 
-def get_journal(request, kd_jurnal):
-	data_journal = get_object_or_404(Journal, id=kd_jurnal)
-	data_kategori = Kategori.objects.all()
+def get_journal(request, id):
+	data_journal = get_object_or_404(Journal, kd_jurnal=id)
+	data_kategori = Kategori_Journal.objects.all()
 
 	context = {
 		'judul' : 'Journal',
@@ -57,15 +59,15 @@ def get_journal(request, kd_jurnal):
 	return render(request, "resources/jurnal.html", context)
 
 def get_journals(request):
-    journals_ = Journal.objects.all()
-    data_kategori = Kategori.objects.all()
+    journals_ = Journal.objects.all().order_by('-created')
+    data_kategori = Kategori_Journal.objects.all()
     
     context = {
 		'judul' : 'Journal',
 		'subjudul' : "Journal",
 		# 'logo':'img/logo_nav.png',
 		'journals':journals_,
-		'kategori':data_kategori,
+		'catj':data_kategori,
 		'nav' : [
 			['nav-link','/', 'Home'],
 			['nav-link', '/resources', 'Resources'],
@@ -74,13 +76,34 @@ def get_journals(request):
 			['nav-link','/bantuan', 'Bantuan'],
 		]
 	}
-    return render(request, "resources/jurnal.html", context)
+    return render(request, "resources/kategori_jurnal.html", context)
 
-def get_buku(request, id_buku):
+def get_journal_kategori(request, id):
+    journal_ = Journal.objects.filter(kategorij_id=id)
+    paginator = Paginator(journal_, 10)
+    page = request.GET.get('page')
+    journal = paginator.get_page(page)
+    categories = Kategori_Journal.objects.all()
+    context = {
+        'subjudul' : "Journal",
+        'journals' : journal,
+		"catj":categories,
+        'nav' : [
+			['nav-link','/', 'Home'],
+			['nav-link', '/resources', 'Resources'],
+			['nav-link', '/panduan', 'Panduan'],
+			['nav-link', '/dokumen', 'Dokumen'],
+			['nav-link','/bantuan', 'Bantuan'],
+		]
+    }
+    return render(request, "resources/kategori_jurnal.html", context)
+
+def get_buku(request, id):
+    bukulain = Buku.objects.order_by('-created')[:8]
     form = ReviewForm(request.POST or None)
-    buku = get_object_or_404(Buku, id=id_buku)
-    rbukus = Buku.objects.filter(id_kategori=buku.kategori.id)
-    r_review = Review.objects.filter(id=id_buku).order_by('-created')
+    buku = get_object_or_404(Buku, id_buku=id)
+    rbukus = Buku.objects.filter(kategori_id=buku.kategori.id_kategori)
+    r_review = Review.objects.filter(buku_id=id).order_by('-created')
 
     paginator = Paginator(r_review, 4)
     page = request.GET.get('page')
@@ -90,9 +113,9 @@ def get_buku(request, id_buku):
         if request.user.is_authenticated:
             if form.is_valid():
                 temp = form.save(commit=False)
-                temp.customer = User.objects.get(id=request.user.id)
+                temp.reviewer = User.objects.get(id=request.user.id)
                 temp.buku = buku          
-                temp = Buku.objects.get(id=id_buku)
+                temp = Buku.objects.get(id_buku=id)
                 temp.totalreview += 1
                 temp.totalrating += int(request.POST.get('review_star'))
                 form.save()  
@@ -103,10 +126,20 @@ def get_buku(request, id_buku):
         else:
             messages.error(request, "You need login first.")
     context = {
+        'judul' : 'Buku',
+        'subjudul' : "Buku",
         'buku':buku,
         'rbukus': rbukus,
+        'rekombuku': bukulain,
         'form': form,
-        'rreview': rreview
+        'rreview': rreview,
+        'nav' : [
+			['nav-link','/', 'Home'],
+			['nav-link', '/resources', 'Resources'],
+			['nav-link', '/panduan', 'Panduan'],
+			['nav-link', '/dokumen', 'Dokumen'],
+			['nav-link','/bantuan', 'Bantuan'],
+		]
     }
     return render(request, 'resources/buku.html', context)
 
@@ -116,21 +149,55 @@ def get_bukus(request):
     paginator = Paginator(bukus_, 10)
     page = request.GET.get('page')
     bukus = paginator.get_page(page)
-    return render(request, "resources/kategori.html", {"buku":bukus})
+    categories = Kategori.objects.all()
+    context = {
+        'subjudul' : "Buku",
+        "buku":bukus,
+		"cat":categories,
+        'nav' : [
+			['nav-link','/', 'Home'],
+			['nav-link', '/resources', 'Resources'],
+			['nav-link', '/panduan', 'Panduan'],
+			['nav-link', '/dokumen', 'Dokumen'],
+			['nav-link','/bantuan', 'Bantuan'],
+		]
+    }
+    return render(request, "resources/kategori.html", context)
 
 def get_buku_kategori(request, id):
-    buku_ = Buku.objects.filter(id_kategori=id)
+    buku_ = Buku.objects.filter(kategori_id=id)
     paginator = Paginator(buku_, 10)
     page = request.GET.get('page')
     buku = paginator.get_page(page)
-    return render(request, "resources/kategori.html", {"buku":buku})
-
-def get_pengarang(request, id_pengarang):
-    wrt = get_object_or_404(Pengarang, id=id_pengarang)
-    buku = Buku.objects.filter(pengarang_id=wrt.id)
+    categories = Kategori.objects.all()
     context = {
+        'subjudul' : "Buku",
+        "buku":buku,
+		"cat":categories,
+        'nav' : [
+			['nav-link','/', 'Home'],
+			['nav-link', '/resources', 'Resources'],
+			['nav-link', '/panduan', 'Panduan'],
+			['nav-link', '/dokumen', 'Dokumen'],
+			['nav-link','/bantuan', 'Bantuan'],
+		]
+    }
+    return render(request, "resources/kategori.html", context)
+
+def get_pengarang(request, id):
+    wrt = get_object_or_404(Pengarang, id_pengarang=id)
+    buku = Buku.objects.filter(pengarang_id=wrt.id_pengarang)
+    context = {
+        'subjudul' : "Penulis",
         "wrt": wrt,
-        "buku": buku
+        "buku": buku,
+        'nav' : [
+			['nav-link','/', 'Home'],
+			['nav-link', '/resources', 'Resources'],
+			['nav-link', '/panduan', 'Panduan'],
+			['nav-link', '/dokumen', 'Dokumen'],
+			['nav-link','/bantuan', 'Bantuan'],
+		]
     }
     return render(request, "resources/penulis.html", context)
 

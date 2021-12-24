@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load customfunction %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="view-details">
+								<img src="{{ wrt.foto.url }}">
+							</div>
+						</div>
+						
+						<div class="col-sm-8">
+							<div class="product-information">
+								<h3>{{ wrt.nama_pengarang }}</h3>
+								<article class="text-justify" style="margin-top:10px;">{{ wrt.deskripsi_pengarang }}</article>
+
+							</div>
+						</div>
+					</div>	
+				</div>
+
+				<div class="col-sm-12">
+                    <div class="titleheader">
+						<h3 class="h2header text-center">Karya Penulis</h3>
+					</div>
+					<div class="regulara sliderzx text-center">
+						{% for item in buku %}
+						<div class="book-wrapper text-center">
+							<div class="coverpage">
+								<img src="{{ item.cover.url }}"/>
+							</div>
+							<a href="{% url 'buku' id=item.id_buku %}">{{ item.jdl_buku|text_short }}</a>
+                            <a href="{% url 'pengarang' id=item.pengarang.id_pengarang %}">{{ item.pengarang }}</a>
+							<div class="rating">
+								{{ item.totalrating|averagerating:item.totalreview }}
+								<span class="totalrating">{{ item.totalreview|add:-1 }}</span>
+							</div>
+							<p>Rp. {{ item.harga }}</p>
+							<button class="btn btn-warning" id="addTocart" data-book-id="{{ item.id_buku }}">
+									<i class="fa fa-shopping-cart"></i>Add to cart
+								</button>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+{% endblock %}
