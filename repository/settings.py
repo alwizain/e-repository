@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'dokumen',
     'bantuan',
     'jam',
+    'berita',
+    'kolaborasi',
 ]
 
 MIDDLEWARE = [

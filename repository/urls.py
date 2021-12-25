@@ -38,6 +38,8 @@ urlpatterns = [
     path('panduan/', include('panduan.urls')),
     path('bantuan/', include('bantuan.urls')),
     path('jam/', include('jam.urls')),
+    path('berita/', include('berita.urls')),
+    path('kolaborasi/', include('kolaborasi.urls')),
     
     #path api
     # path('api/', include(router.urls)),
