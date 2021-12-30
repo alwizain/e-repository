@@ -14,7 +14,8 @@ def index(request):
 		# 'logo_sml':'img/logo_sml.png',
 		'nav' : [
 			['nav-link active','/', 'Home'],
-			['nav-link', '/resources', 'Resources'],
+			['nav-link dropdown-toggle', '/resources', 'Resources'],
+			['dropdown-item', '/panduan', 'Panduan'],
 			['nav-link', '/panduan', 'Panduan'],
 			['nav-link', '/dokumen', 'Dokumen'],
 			['nav-link','/bantuan', 'Bantuan'],

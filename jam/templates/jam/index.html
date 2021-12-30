@@ -1,35 +1,38 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block content %}
+{% block header %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+{% endblock header %}
 
-	<div class="jumbotron jumbotron-fluid">
-          <div class="container text-center">
-            <div class="container">
-              <div class="row">
-                <h1 class="display-3 text-center">	
-                    JAM PELAYANAN	
-                </h1>
-              </div>
-              <br><br><br>
-              <div class="container">
-                <div class="row">
-                  <div class="col-sm text-start">
-                    <b>Jam Buka Layanan Ruang Koleksi</b><br><br>
-                    <p>
-                        Senin s.d. Kamis	07.30-19.45 WIB<br>
-                        Jum’at	            07.30-20.00 WIB; istirahat pukul 11.30-13.00 WIB<br>
-                        Sabtu	            08.00-12.00 WIB<br>
-                    </p>
-                    <b>Jam Kantor</b><br><br>
-                    <p>
-                        Senin s.d. Kamis	07.30-16.00 WIB<br>
-                        Jum’at	            07.30-16.30 WIB; istirahat pukul 11.30-13.00 WIB<br>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+{% block content %}
+<div class="container-fluid">
+  <div class="container text-center">
+    <div class="container">
+      <div class="row">
+        <h1 class="display-3 text-center">JAM PELAYANAN</h1>
+      </div>
+        
+      <br><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm text-start">
+            <b>Jam Buka Layanan Ruang Koleksi</b><br><br>
+            <p>
+              Senin s.d. Kamis	07.30-19.45 WIB<br>
+              Jum’at	            07.30-20.00 WIB; istirahat pukul 11.30-13.00 WIB<br>
+              Sabtu	            08.00-12.00 WIB<br>
+            </p>
+            <b>Jam Kantor</b><br><br>
+            <p>
+              Senin s.d. Kamis	07.30-16.00 WIB<br>
+              Jum’at	            07.30-16.30 WIB; istirahat pukul 11.30-13.00 WIB<br>
+            </p>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <br><br><br><br><br><br><br><br><br>
 {% endblock content %}

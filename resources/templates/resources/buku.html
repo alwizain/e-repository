@@ -2,23 +2,38 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% load customfunction %}
+
+{% block header %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+{% endblock header %}
+
 {% block content %}
 	<div class="container-fluid">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="row">
-						<div class="col-sm-3">
+						<div class="col-sm-2">
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item"><h5><b>Kategori Buku</b></h5></li>
+								{% for item in cat %}
+								<li class="kategori_menu list-group-item"><a href="{% url 'kategori' id=item.id_kategori %}">{{ item.nama_kategori }}</a></li>
+								{% endfor %}
+								
+							</ul>
+						</div>
+						<div class="col-sm-2">
 							<div class="grid-item">
 								<div class="view-details" style="cursor:pointer">
 									<img id="product_image" class="lookInsideImg" src="{{ buku.cover.url }}">
 								</div>
 							</div>		
 						</div>
-						
+			
 						<div class="col-sm-6">
 							<div class="product-information">
 								<h4>{{ buku.jdl_buku }}</h4>
+								<p><a href="{% url 'kategori' id=buku.kategori.id_kategori %}">{{ buku.kategori }} </a></p>
 								<p style="margin: 0px">by <a style="font-weight:bold" href="{% url 'pengarang' id=buku.pengarang.id_pengarang %}">{{ buku.pengarang }}</a></p>
 								<div class='rating'>
 									{{ buku.totalrating|averagerating:buku.totalreview }}
@@ -30,11 +45,11 @@
 
 							</div>
 						</div>
-						<div class="col-sm-3">
+						<div class="col-sm-2">
 							<div class="pricebox">
 								<p>Harga: Rp. <span> {{ buku.harga }}</span></p>
-								<button class="btn btn-warning" id="addTocart" data-book-id="{{ buku.id_buku }}">
-									<i class="fa fa-shopping-cart""></i>Add to cart
+								<button class="btn btn-warning" id="addTocart" data-buku-id="{{ buku.id_buku }}">
+									<i class="fa fa-shopping-cart"></i> Keranjang
 								</button>
 							</div>
 						</div>
@@ -67,6 +82,7 @@
 						<div class="form-group">
 							{{ form.review_text|as_crispy_field }}
 						</div>
+						<br>
 						<div class="form-group">
 							<button class="btn btn-warning" type="submit" style="color: #fff">Submit </button>
 						</div>
@@ -110,9 +126,6 @@
 								<span class="totalrating">{{ item.totalreview|add:-1 }}</span>
 							</div>
 							<p>Rp. {{ item.harga }}</p>
-							<button class="btn btn-warning" id="addTocart" data-book-id="{{ item.id_buku }}">
-									<i class="fa fa-shopping-cart"></i>Add to cart
-								</button>
 						</div>
 						{% endfor %}
 					</div>

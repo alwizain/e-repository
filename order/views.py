@@ -13,11 +13,24 @@ def order_create(request):
 	if request.user.is_authenticated:
 		akun = get_object_or_404(User, id=request.user.id)
 		form = OrderCreateForm(request.POST or None, initial={"nama": akun.first_name, "email": akun.email})
+		context = {
+		'subjudul' : "Checkout",
+		'akun' : akun,
+		'form' : form,
+		# 'logo':'img/logo_nav.png',
+		'nav' : [
+			['nav-link','/', 'Home'],
+			['nav-link', '/resources', 'Resources'],
+			['nav-link ', '/panduan', 'Panduan'],
+			['nav-link', '/dokumen', 'Dokumen'],
+			['nav-link active','/bantuan', 'Bantuan'],
+		]
+	}
 		if request.method == 'POST':
 			if form.is_valid():
 				order = form.save(commit=False)
 				order.Akun = User.objects.get(id=request.user.id)
-				order.payable = cart.get_total_harga()
+				order.payable = cart.get_total_price()
 				order.total_buku = len(cart) # len(cart.cart) // number of individual book
 				order.save()
 
@@ -29,15 +42,19 @@ def order_create(request):
 						jumlah=item['jumlah']
 						)
 				cart.clear()
-				return render(request, 'order/successfull.html', {'pembelian': order})
+				context = {
+					'subjudul' : "Checkout",
+					'order' : order,
+				}
+				return render(request, 'order/successfull.html', context)
 
 			else:
 				messages.error(request, "Fill out your information correctly.")
 
 		if len(cart) > 0:
-			return render(request, 'order/order.html', {"form": form})
+			return render(request, 'order/order.html', context)
 		else:
-			return redirect('resources:bukus')
+			return redirect('bukus')
 	else:
 		return redirect('signin')
 			
@@ -46,8 +63,13 @@ def order_list(request):
 	paginator = Paginator(my_order, 5)
 	page = request.GET.get('page')
 	myorder = paginator.get_page(page)
+	context = {
+		'subjudul' : "Checkout",
+		'myorder' : myorder,
+	}
+	myorder = paginator.get_page(page)
 
-	return render(request, 'order/list.html', {"myorder": myorder})
+	return render(request, 'order/list.html', context)
 
 def order_details(request, id):
 	order_summary = get_object_or_404(Pembelian, kd_transaksi=id)
@@ -57,6 +79,7 @@ def order_details(request, id):
 
 	orderedItem = Item_Pembelian.objects.filter(pembelian_id=id)
 	context = {
+		'subjudul' : "Checkout",
 		"o_summary": order_summary,
 		"o_item": orderedItem
 	}

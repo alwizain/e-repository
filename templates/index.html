@@ -2,20 +2,20 @@
 {% load static %}
 
 {% block header %}
-	
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 {% endblock header %}
 
 {% block content %}
-<div class="jumbotron jumbotron-fluid">
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-2">
 			<ul class="list-group list-group-flush">
 				<li class="list-group-item"><h5><b>Layanan</b></h5></li>
-				<li class="layanan_menu list-group-item"><a href="{% url 'jam' %}">Jam Operasional</a></li>
-				<li class="layanan_menu list-group-item"><a href="{% url 'berita' %}">Berita</a></li>
-				<li class="layanan_menu list-group-item"><a href="">Buku</a></li>
-				<li class="layanan_menu list-group-item"><a href="{% url 'journals' %}">Jurnal</a></li>
-				<li class="layanan_menu list-group-item"><a href="{% url 'kolaborasi' %}">Kolaborasi dengan kami</a></li>
+				<li class="list-group-item"><a href="{% url 'jam' %}">Jam Operasional</a></li>
+				<li class="list-group-item"><a href="{% url 'berita' %}">Berita</a></li>
+				<li class="list-group-item"><a href="{% url 'bukus' %}">Buku</a></li>
+				<li class="list-group-item"><a href="{% url 'journals' %}">Jurnal</a></li>
+				<li class="list-group-item"><a href="{% url 'kolaborasi' %}">Kolaborasi dengan kami</a></li>
 			</ul>
 		</div>
 
@@ -34,7 +34,7 @@
 						</div>
 						<div class="col sm-8">
 								<div class="card">
-									<a type="button" href="..." class="btn btn-primary btn-lg btn-block">Beli Buku Sekarang</a>
+									<a type="button" href="{% url 'bukus' %}" class="btn btn-primary btn-lg btn-block">Beli Buku Sekarang</a>
 								</div>
 						</div>
 					</div>
@@ -42,5 +42,6 @@
 			</div>
 		</div>
 	</div>
+</div>
 	<br><br><br>
 {% endblock content %}

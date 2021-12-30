@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,7 +45,7 @@ INSTALLED_APPS = [
     #apps
     'resources.apps.ResourcesConfig',
     'order.apps.OrderConfig',
-    'buku',
+    'cart.apps.CartConfig',
     'panduan',
     'dokumen',
     'bantuan',
@@ -76,6 +77,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'resources.context_processors.cart',
             ],
         },
     },
@@ -142,6 +144,18 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,"static")]
 MEDIA_URL = '/file/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'file')
+
+CART_SESSION_ID = 'cart'
+
+MESSAGE_TAGS = {
+    messages.INFO: 'alert alert-info',
+    messages.SUCCESS: 'alert alert-success',
+    messages.WARNING: 'alert alert-warning',
+    messages.ERROR: 'alert alert-danger',
+    messages.DEBUG: 'alert alert-info',
+}
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

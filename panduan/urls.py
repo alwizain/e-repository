@@ -6,7 +6,7 @@ from django.conf.urls import url
 from django.views.static import serve
 
 urlpatterns = [
-	path('', views.index, name='index'),
+	path('', views.index, name='panduan'),
 ]
 
 if settings.DEBUG:

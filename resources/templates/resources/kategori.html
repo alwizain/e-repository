@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
 {% load customfunction %}
+
+{% block header %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+{% endblock header %}
+
 {% block content %}
 <div class="row">
     <div class="col-sm-2">
@@ -25,9 +30,9 @@
                 {{ item.totalrating|averagerating:item.totalreview }}
                 <span class="totalrating">{{ item.totalreview|add:-1 }}</span>
             </div>
-            <p> {{ item.harga }} $. </p>
-            <button class="btn btn-warning" id="addTocart" data-book-id="{{ item.id_buku }}">
-                    <i class="fa fa-shopping-cart""></i>Add to cart
+            <p> Rp. {{ item.harga }} </p>
+            <button class="btn btn-warning" id="addTocart" data-buku-id="{{ item.id_buku }}">
+                    <i class="fa fa-shopping-cart"></i> Keranjang
             </button>
         </div>
     {% endfor %}

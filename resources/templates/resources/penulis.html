@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load customfunction %}
+
+{% block header %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+{% endblock header %}
+
 {% block content %}
     <div class="container-fluid">
         <div class="container-fluid">
@@ -41,7 +46,7 @@
 							</div>
 							<p>Rp. {{ item.harga }}</p>
 							<button class="btn btn-warning" id="addTocart" data-book-id="{{ item.id_buku }}">
-									<i class="fa fa-shopping-cart"></i>Add to cart
+									<i class="fa fa-shopping-cart"></i> Keranjang
 								</button>
 						</div>
 						{% endfor %}

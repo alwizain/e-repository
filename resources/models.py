@@ -53,8 +53,8 @@ class Buku(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     totalreview = models.IntegerField(default=1)
-    totalrating = models.IntegerField(default=5)
-    status = models.IntegerField(default=0)
+    totalrating = models.IntegerField(default=1)
+    status = models.IntegerField(default=1)
     deskripsi = models.TextField()
     file = models.FileField(upload_to='file/buku')
     

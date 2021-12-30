@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+{% endblock header %}
+
+{% block content %}
+<div class="container">
+        <div class="row">
+            <div class="col-md-12 cart_info">
+                    <div class="successful-order text-center">
+                        <i class="fa fa-check"></i>
+                        <h3 class="page-header">Thank you for you purchase!</h3>
+                    </div>
+                    <div class="ordered-info">
+                        <h5>OrderID: <span>#2018{{ order.kd_transaksi }}</span></h5>
+                        <h5>Total Item: <span>{{ order.total_buku }}</span></h5>
+                        <h5>Nama: <span>{{ order.nama }}</span></h5>
+                        <h5>Telepon: <span>{{ order.telepon }}</span></h5>
+                        <h5>Email: <span>{{ order.email }}</span></h5>
+                        <h5>Account: <span>{{ order.nomor_akun }}</span></h5>
+                        <h5>Metode Pembayaran: <span>{{ order.metode_pembayaran }}</span></h5>
+                    </div>
+                    <div class="download-info">
+                        <a href="{% url 'order:pdf' id=order.kd_transaksi %}"><i class="fa fa-download" aria-hidden="true"></i></a>
+                    </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

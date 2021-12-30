@@ -40,6 +40,8 @@ urlpatterns = [
     path('jam/', include('jam.urls')),
     path('berita/', include('berita.urls')),
     path('kolaborasi/', include('kolaborasi.urls')),
+    path('cart/', include('cart.urls')),
+    path('order/', include('order.urls')),
     
     #path api
     # path('api/', include(router.urls)),

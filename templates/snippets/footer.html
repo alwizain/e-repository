@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="footer">
+<div class="footer bg-light">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-6 col-md-4 col-xs-12 footer_menu">
@@ -8,7 +8,7 @@
 				<ul>
 					<li class="footer_contact">
 						<i class="fa fa-phone"></i>
-						<p>  081234567890 </p>
+						<a class="nav-link" href="https://api.whatsapp.com/send?phone=081234567890&text=Hallo,%20mau%20tanya%20dong.">081234567890</a>
 					</li>
 					<li class="footer_contact">
 						<i class="fa fa-envelope"></i>
@@ -25,19 +25,19 @@
 				<h3>Menu</h3>
 				<ul>
 					<li class="footer_menu">
-						<a href="">Buku</a>
+						<a href="{% url 'bukus' %}">Buku</a>
 					</li>
 					<li class="footer_menu">
-						<a href="">Jurnal</a>
+						<a href="{% url 'journals' %}">Jurnal</a>
 					</li>
 					<li class="footer_menu">
-						<a href="">Panduan</a>
+						<a href="{% url 'panduan' %}">Panduan</a>
 					</li>
 					<li class="footer_menu">
-						<a href="">Dokumen Pendukung</a>
+						<a href="{% url 'dokumen' %}">Dokumen Pendukung</a>
 					</li>
 					<li class="footer_menu">
-						<a href="">Bantuan</a>
+						<a href="{% url 'bantuan' %}">Bantuan</a>
 					</li>					
 				</ul>
 			</div>

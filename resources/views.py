@@ -102,6 +102,7 @@ def get_buku(request, id):
     bukulain = Buku.objects.order_by('-created')[:8]
     form = ReviewForm(request.POST or None)
     buku = get_object_or_404(Buku, id_buku=id)
+    categories = Kategori.objects.all()
     rbukus = Buku.objects.filter(kategori_id=buku.kategori.id_kategori)
     r_review = Review.objects.filter(buku_id=id).order_by('-created')
 
@@ -129,6 +130,7 @@ def get_buku(request, id):
         'judul' : 'Buku',
         'subjudul' : "Buku",
         'buku':buku,
+        'cat' : categories,
         'rbukus': rbukus,
         'rekombuku': bukulain,
         'form': form,

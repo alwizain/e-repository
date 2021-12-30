@@ -6,21 +6,15 @@ from django.utils.safestring import mark_safe
 from django import template
 register = template.Library()
 
-shippingConst = 100
-
 
 @register.filter(name='text_short')
 def text_short(value):
 	temp = value[0:50]
 	return temp
-
-@register.filter(name='shipping')
-def shipping(value):
-	return shippingConst
 	
 @register.filter(name='payabletotal')
 def  payabletotal(value):
-	return value+shippingConst
+	return value
 
 
 @register.filter(name='averagerating')
