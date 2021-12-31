@@ -40,6 +40,18 @@ a:focus {
 outline: none!important;
 }
 
+/* search bar */
+.header-top{
+  border-bottom: 1px solid #797979;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  background: none repeat scroll 0 0 #232f3e;
+}
+
+h1{
+  color: #000;
+}
+
 /* navbar */
 .navbar {
   -webkit-box-shadow: 0 8px 6px -6px #999;
@@ -51,6 +63,13 @@ outline: none!important;
 
 .nav-link {
   color: #000;
+}
+
+.jumbotron {
+	background-image: url("/static/img/library.jpg");
+	background-position: center;
+	background-size: cover;
+	height: 500px;
 }
 
 

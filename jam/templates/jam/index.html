@@ -6,33 +6,41 @@
 {% endblock header %}
 
 {% block content %}
-<div class="container-fluid">
-  <div class="container text-center">
-    <div class="container">
-      <div class="row">
-        <h1 class="display-3 text-center">JAM PELAYANAN</h1>
+	<div class="container-fluid">
+    <div class="container-fluid">
+      <div class="container text-center">
+        <h1 class="display-4"><b>JAM PELAYANAN</b></h1>
       </div>
-        
-      <br><br><br>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm text-start">
-            <b>Jam Buka Layanan Ruang Koleksi</b><br><br>
-            <p>
-              Senin s.d. Kamis	07.30-19.45 WIB<br>
-              Jum’at	            07.30-20.00 WIB; istirahat pukul 11.30-13.00 WIB<br>
-              Sabtu	            08.00-12.00 WIB<br>
-            </p>
-            <b>Jam Kantor</b><br><br>
-            <p>
-              Senin s.d. Kamis	07.30-16.00 WIB<br>
-              Jum’at	            07.30-16.30 WIB; istirahat pukul 11.30-13.00 WIB<br>
-            </p>
+    </div>
+  <br>
+    <div class="row">
+      <div class="col-sm-2">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><h5><b>Layanan</b></h5></li>
+          <li class="layanan_menu list-group-item"><a href="{% url 'berita' %}">Berita</a></li>
+          <li class="layanan_menu list-group-item"><a href="{% url 'bukus' %}">Buku</a></li>
+          <li class="layanan_menu list-group-item"><a href="{% url 'journals' %}">Jurnal</a></li>
+          <li class="layanan_menu list-group-item"><a href="{% url 'kolaborasi' %}">Kolaborasi dengan kami</a></li>
+        </ul>
+      </div>  
+      <div class="col-sm-10 text-center">
+        <div class="container">
+          <div class="row text-start">
+              <h4>Jam Buka Layanan Ruang Koleksi</h4><br><br>
+              <p>
+                  Senin s.d. Kamis  07.30-19.45 WIB<br>
+                  Jum’at            07.30-20.00 WIB; istirahat pukul 11.30-13.00 WIB<br>
+                  Sabtu             08.00-12.00 WIB<br><br>
+              </p>
+              <h4>Jam Kantor</h4><br><br>
+              <p>
+                  Senin s.d. Kamis  07.30-16.00 WIB<br>
+                  Jum’at            07.30-16.30 WIB; istirahat pukul 11.30-13.00 WIB<br>
+              </p>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 <br><br><br><br><br><br><br><br><br>
 {% endblock content %}
