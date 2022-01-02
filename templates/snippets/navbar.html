@@ -43,7 +43,7 @@
 						<i class="fa fa-user-circle"></i>
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item disabled" href="#"><i class="fa fa-user-circle"></i> {{ request.user.username }}</a>
+						<a class="dropdown-item disabled" href="#"><i class="fa fa-user-circle"></i> {{ request.user.first_name }}</a>
 						<a class="dropdown-item" href="{% url 'cart:cart_details' %}"><i class="fa fa-shopping-cart"></i> Keranjang</a>
 						<a class="dropdown-item" href="{% url 'signout' %}"><i class="fa fa-sign-out"></i> Sign Out</a>
 					</div>

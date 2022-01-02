@@ -1,99 +1,119 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block header %}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-{% endblock header %}
-
-{% block content %}
-	<div class="container-fluid">
-    <div class="container-fluid">
-      <div class="container text-center">
-        <h1 class="display-4"><b>PANDUAN</b></h1><br>
-      </div>
-    </div>
-    <br>
-        <div class="row">
-          <div class="col-sm-2">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item"><h5><b>Resources</b></h5></li>
-              <li class="layanan_menu list-group-item"><a href="{% url 'bukus' %}">Buku</a></li>
-              <li class="layanan_menu list-group-item"><a href="{% url 'journals' %}">Jurnal</a></li>
-            </ul>
-            <br>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item"><h5><b>Layanan Lainnya</b></h5></li>
-              <li class="layanan_menu list-group-item"><a href="/dokumen">Dokumen</a></li>
-              <li class="layanan_menu list-group-item"><a href="/bantuan">Bantuan</a></li>
-            </ul>
-          </div>
-          <div class="col-sm-10">
-          <div class="row">
-            <div class="class col-md">
-                <div class="row-sm text-start">
-                    <b>APLIKASI</b>
-                    <p style="text-indent: 45px;">
-                        Pada halaman utama website terdapat menu-menu informasi untuk umum. Untuk membuka informasi yang ada di dalamnya, silahkan klik menu yang diinginkan. Menu yang tersedia antara lain:<br>
-                        1. Kategori<br>
-                        Kategori berisi kumpulan Buku dan Jurnal.<br>
-                        2. Panduan<br>
-                        Panduan berisi tata cara penggunaan Aplikasi e-Repository.<br>
-                        3. Dokumen<br>
-                        Dokumen berisi file-file yang berkaitan dengan Aplikasi e-Repository.<br>
-                        4. Bantuan<br>
-                        Bantuan berisi Frequently Asked Questions (FAQ) atau pertanyaan dan jawaban seputar Aplikasi e-Repository.<br>
-                    </p>
-                  </div>
-                <div class="row-sm text-start">
-                    <b>LOGIN</b>
-                    <p>
-                        1. Klik menu “LOGIN” pada pojok kanan atas halaman.<br>
-                        2. Maka akan muncul halaman Login.<br>
-                        3. Masukkan username dan password.<br>
-                        4. Klik tombol Login.
-                    </p>
-                  </div>
-                  {% comment %} <br> {% endcomment %}
-                  <div class="row-sm text-start">
-                    <b>REGISTRATION</b>
-                    <p>
-                        1. Klik menu “REGISTRATION” pada pojok kanan atas halaman sebelah menu LOGIN.<br>
-                        2. Maka akan muncul halaman Registration.<br>
-                        3. Isikan data sesuai dengan ketentuan yang ada.<br>
-                        4. Klik tombol Daftar.<br>
-                    </p>
-                  </div>
-            </div>
-            <div class="class col-md">
-                <div class="row-sm text-start">
-                    <b>MENGUNDUH JURNAL</b>
-                    <p>
-                        1. Klik menu “KATEGORI” pilih “JURNAL”.<br>
-                        2. Maka akan muncul halaman Jurnal yang berisi kumpulan Jurnal yang tersedia pada Aplikasi e-Repository.<br>
-                        3. Cari dan pilih Jurnal yang akan diunduh.<br>
-                        4. Klik tombol Pdf.<br>
-                        5. Maka jurnal akan terunduh secara otomatis.<br>
-                    </p>
-                  </div>
-                    <div class="row-sm text-start">
-                    <b>MEMBELI BUKU</b>
-                    <p>
-                        1. Klik menu “KATEGORI” pilih “BUKU”.<br>
-                        2. Maka akan muncul halaman Buku yang berisi kumpulan Buku yang tersedia pada Aplikasi e-Repository.<br>
-                        3. Cari dan pilih Buku yang akan diunduh.<br>
-                        4. Klik tombol Beli.<br>
-                        5. Maka akan diarahkan pada halaman pembelian dan pembayaran.<br>
-                        6. Setujui semua persyaratannya<br>
-                        7. Klik tombol Bayar.<br>
-                        8. Maka akan muncul halaman transaksi pembayaran.<br>
-                    </p>
-                    <br><br><br><br><br><br><br><br><br>
-                  </div>
-                </div>
-            </div>
-          <div>
-        </div>
+{% extends "base.html" %} {% load static %} {% block header %}
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+  crossorigin="anonymous"
+/>
+{% endblock header %} {% block content %}
+<div class="container-fluid">
+  <div class="container-fluid">
+    <div class="container text-center">
+      <h1 class="display-4"><b>PANDUAN</b></h1>
+      <br />
     </div>
   </div>
-
+  <br />
+  <div class="row">
+    <div class="col-sm-2">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <h5><b>Resources</b></h5>
+        </li>
+        <li class="layanan_menu list-group-item">
+          <a href="{% url 'bukus' %}">Buku</a>
+        </li>
+        <li class="layanan_menu list-group-item">
+          <a href="{% url 'journals' %}">Jurnal</a>
+        </li>
+      </ul>
+      <br />
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <h5><b>Layanan Lainnya</b></h5>
+        </li>
+        <li class="layanan_menu list-group-item">
+          <a href="/dokumen">Dokumen</a>
+        </li>
+        <li class="layanan_menu list-group-item">
+          <a href="/bantuan">Bantuan</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-10">
+      <div class="row">
+        <div class="class col-md">
+          <div class="row-sm text-start">
+            <b>APLIKASI</b>
+            <p style="text-indent: 45px">
+              Pada halaman utama website terdapat menu-menu informasi untuk
+              umum. Untuk membuka informasi yang ada di dalamnya, silahkan klik
+              menu yang diinginkan. Menu yang tersedia antara lain:<br />
+              1. Kategori<br />
+              Kategori berisi kumpulan Buku dan Jurnal.<br />
+              2. Panduan<br />
+              Panduan berisi tata cara penggunaan Aplikasi e-Repository.<br />
+              3. Dokumen<br />
+              Dokumen berisi file-file yang berkaitan dengan Aplikasi
+              e-Repository.<br />
+              4. Bantuan<br />
+              Bantuan berisi Frequently Asked Questions (FAQ) atau pertanyaan
+              dan jawaban seputar Aplikasi e-Repository.<br />
+            </p>
+          </div>
+          <div class="row-sm text-start">
+            <b>LOGIN</b>
+            <p>
+              1. Klik menu “LOGIN” pada pojok kanan atas halaman.<br />
+              2. Maka akan muncul halaman Login.<br />
+              3. Masukkan username dan password.<br />
+              4. Klik tombol Login.
+            </p>
+          </div>
+          {% comment %} <br />
+          {% endcomment %}
+          <div class="row-sm text-start">
+            <b>REGISTRATION</b>
+            <p>
+              1. Klik menu “REGISTRATION” pada pojok kanan atas halaman sebelah
+              menu LOGIN.<br />
+              2. Maka akan muncul halaman Registration.<br />
+              3. Isikan data sesuai dengan ketentuan yang ada.<br />
+              4. Klik tombol Daftar.<br />
+            </p>
+          </div>
+        </div>
+        <div class="class col-md">
+          <div class="row-sm text-start">
+            <b>MENGUNDUH JURNAL</b>
+            <p>
+              1. Klik menu “KATEGORI” pilih “JURNAL”.<br />
+              2. Maka akan muncul halaman Jurnal yang berisi kumpulan Jurnal
+              yang tersedia pada Aplikasi e-Repository.<br />
+              3. Cari dan pilih Jurnal yang akan diunduh.<br />
+              4. Klik tombol Pdf.<br />
+              5. Maka jurnal akan terunduh secara otomatis.<br />
+            </p>
+          </div>
+          <div class="row-sm text-start">
+            <b>MEMBELI BUKU</b>
+            <p>
+              1. Klik menu “KATEGORI” pilih “BUKU”.<br />
+              2. Maka akan muncul halaman Buku yang berisi kumpulan Buku yang
+              tersedia pada Aplikasi e-Repository.<br />
+              3. Cari dan pilih Buku yang akan diunduh.<br />
+              4. Klik tombol Beli.<br />
+              5. Maka akan diarahkan pada halaman pembelian dan pembayaran.<br />
+              6. Setujui semua persyaratannya<br />
+              7. Klik tombol Bayar.<br />
+              8. Maka akan muncul halaman transaksi pembayaran.<br />
+            </p>
+            <br /><br /><br /><br /><br /><br /><br /><br /><br />
+          </div>
+        </div>
+      </div>
+      <div></div>
+    </div>
+  </div>
+</div>
 {% endblock content %}

@@ -7,7 +7,7 @@ $(document).on('ready', function() {
 			data : {bukuid:1},
 			success : function(data){
 
-				$("#snackbar").html("Add To Cart");
+				$("#snackbar").html("Ditambahkan ke keranjang!");
 				var x = document.getElementById("snackbar");
 				x.className = "show";
 				setTimeout(function(){ x.className = x.className.replace("show", ""); }, 1000);

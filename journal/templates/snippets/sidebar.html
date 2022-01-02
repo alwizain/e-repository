@@ -1,0 +1,18 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><h5>Category</h5></li>
+                {% for p in cat %}
+                <li class="list-group-item"><a href="">-</a></li>
+                {% endfor %}
+                
+            </ul>
+        </div>
+        <div class="col-sm-10">
+            {% block content %}
+            
+            {% endblock %}
+        </div>
+    </div>
+</div>

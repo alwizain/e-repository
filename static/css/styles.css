@@ -1,3 +1,14 @@
+html, body {
+  margin:0;
+  padding:0;
+  height:100%;
+}
+
+#container {
+ position:relative;
+ min-height: 100%;
+}
+
 /* Pre loader*/
 .loader{
   position: absolute;
@@ -40,18 +51,6 @@ a:focus {
 outline: none!important;
 }
 
-/* search bar */
-.header-top{
-  border-bottom: 1px solid #797979;
-  padding-top: 10px;
-  padding-bottom: 15px;
-  background: none repeat scroll 0 0 #232f3e;
-}
-
-h1{
-  color: #000;
-}
-
 /* navbar */
 .navbar {
   -webkit-box-shadow: 0 8px 6px -6px #999;
@@ -71,7 +70,6 @@ h1{
 	background-size: cover;
 	height: 500px;
 }
-
 
 /*============= Login */
 
@@ -169,6 +167,11 @@ h1{
 .kategori_menu a{
   color:#000000;
   text-decoration: none;
+}
+
+.form-search {
+  position: absolute;
+  right: 0;
 }
 
 /* resources */
@@ -592,6 +595,8 @@ margin-bottom: 20px;
 
 /* footer */
 .footer{
+    width: 100%;
+    position: absolute;
   -webkit-box-shadow: 0 0 10px #999;
   -moz-box-shadow: 0 0 10px #999;
   box-shadow: 0 0 10px #999;

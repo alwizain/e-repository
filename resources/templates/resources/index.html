@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
 {% load customfunction %}
-
 {% block header %}
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 {% endblock header %}
-
 {% block content %}
+
 	<div class="container-fluid">
 		<div class="container-fluid">
 			<div class="row">
@@ -20,15 +19,24 @@
 					<br>
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item"><h5><b>Layanan Lainnya</b></h5></li>
-						<li class="layanan_menu list-group-item"><a href="/panduan">Panduan</a></li>
-						<li class="layanan_menu list-group-item"><a href="/dokumen">Dokumen</a></li>
-						<li class="layanan_menu list-group-item"><a href="/bantuan">Bantuan</a></li>
+						<li class="layanan_menu list-group-item"><a href="{% url 'berita' %}">Berita</a></li>
+						<li class="layanan_menu list-group-item"><a href="/panduan">panduan</a></li>
+						<li class="layanan_menu list-group-item"><a href="/dokumen">Unduh Dokumen Petunjuk</a></li>
 					</ul>
 				</div>
 				<div class="col-sm-10">
+					<div class="container text-center">
+						<h1 class="display-3 text-center">	
+							Resources
+						</h1>
+						<p class="lead"><b>Untuk memenuhi kebutuhan pemustaka, kami melanggan berbagai bahan perpustakaan digital online (e-Resources) seperti jurnal , ebook, dan karya-karya referensi online lainnya. Setiap anggota Perpustakaan Nasional Republik Indonesia (Perpusnas) dan telah memiliki nomor anggota yang sah, berhak memanfaatkan layanan koleksi digital online yang kami langgan (e-Resources).</b></p>
+					</div>
+
+					<br><br><br><br>
+
 					<div class="titleheader">
 						<h3 class="h2header text-center">Buku Terbaru</h3>
-						<h5 class="h5link text-center"><a href="{% url 'bukus' %}">Tampilkan Semua</a></h5>
+						<h5 class="h5link text-center"><a href="{% url 'bukus' %}">Lihat</a></h5>
 					</div>
 					<div class="regulara sliderzx text-center">
 						{% for item in newbooks %}
@@ -50,7 +58,7 @@
 
 					<div class="titleheader">
 						<h3 class="h2header text-center">Journal Terbaru</h3>
-						<h5 class="h5link text-center"><a href="{% url 'journals' %}">Tampilkan Semua</a></h5>
+						<h5 class="h5link text-center"><a href="{% url 'journals' %}">Lihat</a></h5>
 					</div>
 					<div class="regulara sliderzx text-center">
 						{% for j in newjournal %}
@@ -81,8 +89,8 @@
 								<span class="totalrating">{{ p.totalreview|add:-1 }}</span>
 							</div>
 							<p>Rp. {{ p.harga }}</p>
-							<button class="btn btn-warning" id="addTocart" data-book-id="{{ p.id_buku }}">
-									<i class="fa fa-shopping-cart"></i>Add to cart
+							<button class="btn btn-warning" id="addTocart" data-buku-id="{{ p.id_buku }}">
+									<i class="fa fa-shopping-cart"></i> Keranjang
 								</button>
 						</div>
 						{% endfor %}

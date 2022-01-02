@@ -1,51 +1,71 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block header %}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-{% endblock header %}
-
-{% block content %}
-	<div class="container-fluid">
-    <div class="container-fluid">
-      <div class="container text-center">
-        <h1 class="display-4"><b>BANTUAN</b></h1><br>
-      </div>
+{% extends "base.html" %} {% load static %} {% block header %}
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+  crossorigin="anonymous"
+/>
+{% endblock header %} {% block content %}
+<div class="container-fluid">
+  <div class="container-fluid">
+    <div class="container text-center">
+      <h1 class="display-4"><b>BANTUAN</b></h1>
+      <br />
     </div>
-    <br>
-    <div class="row">
-      <div class="col-sm-2">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item"><h5><b>Resources</b></h5></li>
-          <li class="layanan_menu list-group-item"><a href="{% url 'bukus' %}">Buku</a></li>
-          <li class="layanan_menu list-group-item"><a href="{% url 'journals' %}">Jurnal</a></li>
-        </ul>
-        <br>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item"><h5><b>Layanan Lainnya</b></h5></li>
-          <li class="layanan_menu list-group-item"><a href="/panduan">Panduan</a></li>
-          <li class="layanan_menu list-group-item"><a href="/dokumen">Dokumen</a></li>
-        </ul>
-      </div>
-      <div class="col-sm-10">
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-sm-2">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <h5><b>Resources</b></h5>
+        </li>
+        <li class="layanan_menu list-group-item">
+          <a href="{% url 'bukus' %}">Buku</a>
+        </li>
+        <li class="layanan_menu list-group-item">
+          <a href="{% url 'journals' %}">Jurnal</a>
+        </li>
+      </ul>
+      <br />
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <h5><b>Layanan Lainnya</b></h5>
+        </li>
+        <li class="layanan_menu list-group-item">
+          <a href="/panduan">Panduan</a>
+        </li>
+        <li class="layanan_menu list-group-item">
+          <a href="/dokumen">Dokumen</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-10">
       <div class="row">
         <div class="col-sm text-start">
-          <b>FREQUENTLY ASKED QUESTIONS (FAQ)</b><br><br>
+          <b>FREQUENTLY ASKED QUESTIONS (FAQ)</b><br /><br />
           <p>
-            <b>Q:</b> Apakah yang dimaksud dengan e-Repository?<br>
-            <b>A:</b> e-Repository adalah segala macam sumber informasi dan publikasi yang disediakan dan diakses secara elektronik (online), contohnya e-journal (jurnal elektronik) dan e-book (buku elektronik).<br><br>
+            <b>Q:</b> Apakah yang dimaksud dengan e-Repository?<br />
+            <b>A:</b> e-Repository adalah segala macam sumber informasi dan
+            publikasi yang disediakan dan diakses secara elektronik (online),
+            contohnya e-journal (jurnal elektronik) dan e-book (buku
+            elektronik).<br /><br />
           </p>
           <p>
-            <b>Q:</b> Apakah wajib untuk mengisi seluruh data sebelum melakukan pembelian buku?<br>
-            <b>A:</b> Ya, hal tersebut diperlukan untuk memvalidasi keaslian data dan menjaga keamanan proses transaksi.<br><br>
+            <b>Q:</b> Apakah wajib untuk mengisi seluruh data sebelum melakukan
+            pembelian buku?<br />
+            <b>A:</b> Ya, hal tersebut diperlukan untuk memvalidasi keaslian
+            data dan menjaga keamanan proses transaksi.<br /><br />
           </p>
           <p>
-            <b>Q:</b> Apakah pengguna dapat menambahkan data buku dan jurnal?<br>
-            <b>A:</b> Untuk saat ini penambahan buku dan jurnal hanya dapat dilakukan oleh admin saja.<br><br>
+            <b>Q:</b> Apakah pengguna dapat menambahkan data buku dan jurnal?<br />
+            <b>A:</b> Untuk saat ini penambahan buku dan jurnal hanya dapat
+            dilakukan oleh admin saja.<br /><br />
           </p>
-          <br><br><br><br><br><br><br><br><br>
+          <br /><br /><br /><br /><br /><br /><br /><br /><br />
         </div>
-      <div>
+        <div></div>
+      </div>
     </div>
   </div>
 </div>

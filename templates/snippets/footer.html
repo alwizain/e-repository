@@ -1,54 +1,60 @@
 {% load static %}
 
 <div class="footer bg-light">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-6 col-md-4 col-xs-12 footer_menu">
-				<h3>Contact</h3>
-				<ul>
-					<li class="footer_contact">
-						<i class="fa fa-phone"></i>
-						<a class="nav-link" href="https://api.whatsapp.com/send?phone=081234567890&text=Hallo,%20mau%20tanya%20dong.">081234567890</a>
-					</li>
-					<li class="footer_contact">
-						<i class="fa fa-envelope"></i>
-						<p> tanyarepository@gmail.com </p>
-					</li>
-					<li class="footer_contact">
-						<i class="fa fa-map-marker"></i>
-						<p> Jason Smith </p>
-					</li>
-				</ul>
-			</div>
-		 
-			 <div class="col-sm-8 col-md-4 col-xs-8 footer_menu">
-				<h3>Menu</h3>
-				<ul>
-					<li class="footer_menu">
-						<a href="{% url 'bukus' %}">Buku</a>
-					</li>
-					<li class="footer_menu">
-						<a href="{% url 'journals' %}">Jurnal</a>
-					</li>
-					<li class="footer_menu">
-						<a href="{% url 'panduan' %}">Panduan</a>
-					</li>
-					<li class="footer_menu">
-						<a href="{% url 'dokumen' %}">Dokumen Pendukung</a>
-					</li>
-					<li class="footer_menu">
-						<a href="{% url 'bantuan' %}">Bantuan</a>
-					</li>					
-				</ul>
-			</div>
-			
-			<div class="col-sm-6 col-md-4 col-xs-12 footer_news">
-				<!-- <h3>We accept payment via</h3>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-md-4 col-xs-12 footer_menu">
+        <h3>Contact</h3>
+        <ul>
+          <li class="footer_contact">
+            <i class="fa fa-phone"></i>
+            <a
+              class="nav-link"
+              href="https://api.whatsapp.com/send?phone=081234567890&text=Hallo,%20mau%20tanya%20dong."
+              >081234567890</a
+            >
+          </li>
+          <li class="footer_contact">
+            <i class="fa fa-envelope"></i>
+            <a href="mailto:tanyarepository@gmail.com"
+              >tanyarepository@gmail.com</a
+            >
+          </li>
+          <li class="footer_contact">
+            <i class="fa fa-map-marker"></i>
+            <p>Jason Smith</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-sm-6 col-md-4 col-xs-12 footer_menu">
+        <h3>Menu</h3>
+        <ul>
+          <li class="footer_menu">
+            <a href="{% url 'bukus' %}">Buku</a>
+          </li>
+          <li class="footer_menu">
+            <a href="{% url 'journals' %}">Jurnal</a>
+          </li>
+          <li class="footer_menu">
+            <a href="{% url 'panduan' %}">Panduan</a>
+          </li>
+          <li class="footer_menu">
+            <a href="{% url 'dokumen' %}">Dokumen Pendukung</a>
+          </li>
+          <li class="footer_menu">
+            <a href="{% url 'bantuan' %}">Bantuan</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-sm-6 col-md-4 col-xs-12 footer_news">
+        <!-- <h3>We accept payment via</h3>
 				<div class="footer_paymentmethod">
 					<img src="{% static 'images/bkash.png' %}" alt="" />
 					<img src="{% static 'images/rocket.png' %}" alt="" /> -->
-				<!-- </div>  -->
-			</div>
-		</div>
-	</div>
+        <!-- </div>  -->
+      </div>
+    </div>
+  </div>
 </div>
