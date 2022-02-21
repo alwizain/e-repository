@@ -1,0 +1,7 @@
+Django==3.2
+django-cors-headers==2.4.0
+django-crispy-forms==1.11.0
+django-js-asset==1.2.2
+mysqlclient==1.4.6
+midtransclient==1.4.0
+xhtml2pdf==0.2.5

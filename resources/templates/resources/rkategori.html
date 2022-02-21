@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+{% load customfunction %}
+
+{% block header %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+{% endblock header %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-2">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h5><b>Kategori Buku</b></h5></li>
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='art' %}">Art</a></li>
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='biography' %}">Biography</a></li>
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='business'%}">Business</a></li>
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Christian' %}">Christian</a></li>
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Comics' %}">Comics</a></li>
+
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Contemporary' %}">Contemporary</a></li>
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Cookbooks' %}">Cookbooks</a></li>
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Crime' %}">Crime</a></li>
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Fantasy' %}">Fantasy</a></li>
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Fiction' %}">Fiction</a></li>
+
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='History' %}">History</a></li>
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Horror' %}">Horror</a></li>
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Manga' %}">Manga</a></li>
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Memoir' %}">Memoir</a></li>
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Mystery' %}">Mystery</a></li>
+
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Nonfiction' %}">Nonfiction</a></li>
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Paranormal' %}">Paranormal</a></li>
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Philosophy' %}">Philosophy</a></li>
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Poetry' %}">Poetry</a></li>
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Psychology' %}">Psychology</a></li>
+
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Religion' %}">Religion</a></li>
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Science' %}">Science</a></li>
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Suspense' %}">Suspense</a></li>
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Spirituality' %}">Spirituality</a></li>
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Sports' %}">Sports</a></li>
+
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Thriller' %}">Thriller</a></li>
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Travel' %}">Travel</a></li>
+            <li class="kategori_menu list-group-item"><a href="{% url 'rkategori' genre='Classics' %}">Classics</a></li>
+            
+                        
+        </ul>
+    </div>
+
+    <div class = 'col-sm-10'>
+        {% for item in rbuku %}
+        <div class="book-wrapper text-center">
+            <div class="coverpage">
+                <img src="{{ item.image_url }}"/>
+            </div>
+            <a href="#">{{ item.original_title|truncatechars:30 }}</a>
+            <a href="#">{{ item.authors|truncatechars:15 }}</a>
+            <div class="rating">
+                {{ item.average_rating|averagerating:1 }}
+            </div>
+        </div>
+        {% endfor %}
+    
+        {% if rbuku|length > 0 %}
+        <div class="d-pagination text-center">
+            <ul class="pagination">
+            {% if rbuku.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1">First</a>
+                </li>								
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ rbuku.previous_page_number }}">Previous</a>
+                </li>
+            {% endif %}
+            {% for ord in rbuku.paginator.page_range %}
+                {% if rbuku.number == ord %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ ord }}
+                            <span class="sr-only">(current)</span>
+                        </span>
+                    </li>
+                {% elif ord > rbuku.number|add:'-3' and ord < rbuku.number|add:'3' %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ ord }}">{{ ord }}</a>
+                    </li>
+
+                {% endif %}
+
+            {% endfor %}
+            {% if rbuku.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ rbuku.next_page_number }}">Next</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ rbuku.paginator.num_pages }}">Last</a>
+                </li>
+            {% endif %}
+            </ul>
+        </div>
+        {% else %}
+        <h3 class="text-center mt-5">There are no books Found.</h3>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

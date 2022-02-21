@@ -20,11 +20,6 @@ from .import views
 from django.conf import settings
 from django.conf.urls.static import static
 
-from rest_framework import routers
-
-# router = routers.DefaultRouter()
-# router.register(r'rp_journal', views.JournalViewSet)
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='indexuser'),

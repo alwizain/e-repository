@@ -9,6 +9,11 @@ from .forms import OrderCreateForm
 from .pdfcreator import renderPdf
 import midtransclient
 
+snap = midtransclient.Snap(
+    # Set to true if you want Production Environment (accept real transaction).
+    is_production=False,
+    server_key='SB-Mid-server-G7Z6wpDHr-WyoLQIn-k0sewq'
+)
 
 def order_create(request):
 	cart = Cart(request)

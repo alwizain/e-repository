@@ -72,7 +72,8 @@
 						  <li id="azdd" class="star" data-value="4"> <i class="fa fa-star fa-fw"></i> </li>
 						  <li id="azee" class="star" data-value="5"> <i class="fa fa-star fa-fw"></i> </li>
 						</ul>
-					</div>		
+					</div>
+						
 				   <form action="" method="POST" class="needs-validation" novalidate="">
 				   	{% csrf_token %}
 					
@@ -83,6 +84,7 @@
 							{{ form.review_text|as_crispy_field }}
 						</div>
 						<br>
+						
 						<div class="form-group">
 							<button class="btn btn-warning" type="submit" style="color: #fff">Submit </button>
 						</div>

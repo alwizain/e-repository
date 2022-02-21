@@ -1,5 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
+from resources.helpers import get_book_title
+
+import repository.settings as settings
+import pandas as pd
+import os
+
+book_path = os.path.join(settings.STATICFILES_DIRS[0] + '/dataset/books.csv')
+df_book = pd.read_csv(book_path)
 
 # Create your models here.
 
@@ -47,7 +55,7 @@ class Buku(models.Model):
     kategori = models.ForeignKey('Kategori', on_delete = models.CASCADE)
     pengarang = models.ForeignKey('Pengarang', on_delete = models.CASCADE)
     jdl_buku = models.CharField(max_length=100)
-    harga = models.CharField(max_length=10)
+    harga = models.IntegerField(default=1)
     stok = models.IntegerField()
     cover = models.FileField(upload_to='file/cover')
     created = models.DateTimeField(auto_now_add=True)
@@ -57,7 +65,7 @@ class Buku(models.Model):
     status = models.IntegerField(default=1)
     deskripsi = models.TextField()
     file = models.FileField(upload_to='file/buku')
-    
+
     def __str__(self):
         return "{}".format(self.jdl_buku)
 
@@ -67,3 +75,13 @@ class Review(models.Model):
 	review_star = models.IntegerField()
 	review_text = models.TextField()
 	created = models.DateTimeField(auto_now_add=True)
+
+class UserRating(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_rating')
+    bookid = models.IntegerField()
+    bookrating = models.IntegerField()
+    review_text = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.username.capitalize() + '- ' + get_book_title(self.bookid) + '  - ' + str(self.bookrating)

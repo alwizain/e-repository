@@ -1,27 +1,87 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Repository Sign In</title>
-	{% load static %}
-	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
-</head>
-<body>
-	<div class="container">
-		<div class="row justify-content-md-center">
-	        <div class="col-md-12 cart_info">
-		        <div class="ordered-info">
-		                <h1>OrderID: #2018{{ order.kd_transaksi }}</h1>
-		                <h1>Total Item: {{ order.total_buku }}</h1>
-		                <h1>Nama: {{ order.nama }}</h1>
-		                <h1>Telepon: {{ order.telepon }}</h1>
-		                <h1>Email: {{ order.email }}</h1>
-		                <h1>Account: {{ order.nomor_akun }}</h1>
-		                <h1>Metode Pembayaran: {{ order.metode_pembayaran }}</h1>
-		        </div>
-	        </div>
-		</div>
-	</div> 
-</body>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Nota Pembelian</title>
+	</head>
+	<body>
+		<header>
+			<h1 style="position: relative; text-align: center;">Nota Pembelian</h1>
+			<h1>Detail Pembeli</h1>
+			<address contenteditable>
+				<p><b>Pembeli :</b> {{ order.nama }}</p>
+				<p><b>Instansi :</b> {{ order.instansi }}</p>
+				<p><b>Telepon :</b> {{ order.telepon }}</p>
+				<p><b>Alamat Email :</b> {{ order.email }}</p>
+			</address>
+			<span><img alt="" src="http://www.jonathantneal.com/examples/invoice/logo.png"><input type="file" accept="image/*"></span>
+		</header>
+		<br>
+		<article>
+			<h1>Penerima Pembayaran</h1>
+			<address contenteditable>
+				<p>Repositori Politeknik Pos Indonesia<br>repositorypoltekpos@gmail.com</p>
+			</address>
+			<br>
+			<table class="meta" style="font-size: 100%; table-layout: fixed; width: 100%;border-collapse: separate; border-spacing: 2px;">
+				<thead>
+					<tr>
+						<th style="border-width: 1px; position: relative; text-align: left;"><span contenteditable>No. Pesanan</span></th>
+						
+						<th style="border-width: 1px; position: relative; text-align: left;"><span contenteditable>Waktu Pembayaran</span></th>
+						
+						<th style="border-width: 1px; position: relative; text-align: left;"><span contenteditable>Metode Pembayaran</span></th>
+						
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><span contenteditable>#2022{{ order.kd_transaksi }}</span></td>
+						<td><span contenteditable>{{ order.tgl_transaksi }}</span></td>
+						<td><span contenteditable>{{ order.metode_pembayaran }}</span></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<br>
+
+			<h1>Rincian Pesanan</h1>
+			<table class="inventory">
+				<thead>
+					<tr>
+						<th style="position: relative; text-align: left;"><span contenteditable>Produk</span></th>
+						<th style="position: relative; text-align: left;"><span contenteditable>Kuantitas</span></th>
+						<th style="position: relative; text-align: left;"><span contenteditable>Subtotal</span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><span contenteditable>E-Book</span></td>
+						<td><span contenteditable>{{ order.total_buku }}</span></td>
+						<td><span data-prefix>Rp. </span><span>{{ order.payable }}</span></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<br>
+
+			<table class="balance text-right">
+				<tr>
+					<th style="text-align: right;"><span contenteditable>Total </span></th>
+					<td><b><span data-prefix>Rp. </span><span>{{ order.payable }}</span></b></td>
+				</tr>
+			</table>
+		</article>
+
+		<br>
+
+		<aside>
+			<h1><span contenteditable>Catatan</span></h1>
+			<div contenteditable>
+				<p>E-book akan dikirim melalui email. Harap cek email yang telah terdaftar pada saat melakukan pembelian.</p>
+			</div>
+		</aside>
+	</body>
 </html>

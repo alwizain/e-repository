@@ -1,9 +1,63 @@
 {% extends "base.html" %}
 {% load static %}
 {% load customfunction %}
+
+{% block head %}
+	<!-- Rating CSS -->
+    <!-- Reset styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+{% endblock head %}
+
 {% block header %}
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 {% endblock header %}
+
+ <!-- Bootstrap modal -->
+ <div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="booktitle">Basic Modal</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+
+					<div class="col-8">
+						<strong>Summary: </strong><br>
+						<img id="loading" src="{% static '/img/loading.gif' %}">
+						<p id="booksummary">
+
+						</p>
+						<strong>Authors:</strong>
+						<p id="bookauthors">
+						</p>
+
+						<div id="bookrating"></div>
+					</div>
+
+					<div class="col-4">
+						<img class="img-book" src="" id="bookimage">
+					</div>
+					{% if user.is_authenticated %}
+					<button id="save-book-button" class="btn">Save for Later</button> 
+					{%endif%}
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<!-- End boostrap modal -->
+
+<!-- Rating JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+
 {% block content %}
 
 	<div class="container-fluid">
@@ -14,7 +68,7 @@
 						<li class="list-group-item"><h5><b>Resources</b></h5></li>
 						<li class="layanan_menu list-group-item"><a href="{% url 'bukus' %}">Buku</a></li>
 						<li class="layanan_menu list-group-item"><a href="{% url 'journals' %}">Jurnal</a></li>
-						
+						<li class="layanan_menu list-group-item"><a href="{% url 'book_recommendations' %}">Rekomendasi</a></li>
 					</ul>
 					<br>
 					<ul class="list-group list-group-flush">
@@ -29,7 +83,7 @@
 						<h1 class="display-3 text-center">	
 							Resources
 						</h1>
-						<p class="lead"><b>Untuk memenuhi kebutuhan pemustaka, kami melanggan berbagai bahan perpustakaan digital online (e-Resources) seperti jurnal , ebook, dan karya-karya referensi online lainnya. Setiap anggota Perpustakaan Nasional Republik Indonesia (Perpusnas) dan telah memiliki nomor anggota yang sah, berhak memanfaatkan layanan koleksi digital online yang kami langgan (e-Resources).</b></p>
+						<p class="lead"><b>Untuk memenuhi kebutuhan pemustaka, kami menyediakan berbagai bahan perpustakaan digital online (e-Resources) seperti jurnal , ebook, dan karya-karya referensi online lainnya. Setiap anggota Perpustakaan Nasional Republik Indonesia (Perpusnas) dan telah memiliki nomor anggota yang sah, berhak memanfaatkan layanan koleksi digital online yang kami langgan (e-Resources).</b></p>
 					</div>
 
 					<br><br><br><br>
@@ -38,7 +92,7 @@
 						<h3 class="h2header text-center">Buku Terbaru</h3>
 						<h5 class="h5link text-center"><a href="{% url 'bukus' %}">Lihat</a></h5>
 					</div>
-					<div class="regulara sliderzx text-center">
+					<div class="regulara sliderzx">
 						{% for item in newbooks %}
 						<div class="book-wrapper text-center">
 							<div class="coverpage">
@@ -53,6 +107,7 @@
 						</div>
 						{% endfor %}
 					</div>
+					
 					
 					<br><br><br><br>
 
@@ -95,6 +150,46 @@
 						</div>
 						{% endfor %}
 					</div>
+					
+					<br><br><br><br>
+
+					<div class="titleheader">
+						<h3 class="h2header text-center">Popular Among Users</h3>
+						<h5 class="h5link text-center"><a href="{% url 'rbooks' %}">Lihat Semua</a></h5>
+					</div>
+					<div class="regulara sliderzx text-center">
+						{% for p in books %}
+						<div class="book-wrapper text-center">
+							<div class="coverpage">
+								<img src="{{ p.image_url }}"/>
+							</div>
+							<a href="{% url 'rbuku' bookid=p.book_id %}">{{ p.original_title|truncatechars:30 }}</a>
+							<a href="#">{{ p.authors|truncatechars:15 }}</a>
+							<div class="rating">
+								{{ p.average_rating|averagerating:1 }}
+							</div>
+
+							<a href="javascript:;" onclick='bookDetails(this)' class="btn more-details"
+                            data-book-id="{{ book.book_id }}">More Details</a>
+                        
+                            {% if user.is_authenticated %}
+							<div class='rating-block' id='rating-block-{{ book.book_id }}' onmouseover="rateStart(this)"
+								onclick='rateBook(this)' onmouseout='finishRate(this)' data-book-id="{{ book.book_id }}">
+								<div id='button-text-{{ book.book_id }}'>Rate <i class="fa fa-heart" style="color:red"></i>
+									This Book</a>
+								</div>
+								<div class='rateYo' id='rate-{{ book.book_id }}'></div>
+							</div>
+							{% else %}
+							<div class='rating-block btn' onclick="location.href='#'">
+								<div id='button-text'>Rate <i class="fa fa-heart" style="color:red"></i> This Book
+									</a>
+								</div>
+							</div>
+							{% endif %}
+						</div>
+						{% endfor %}
+					</div>
 				</div>
 				<br>	
 			</div>
@@ -102,3 +197,61 @@
 	</div>
 <br><br><br><br>
 {% endblock content %}
+
+
+{% block scripts %}
+<script type="text/javascript">
+
+	/* preloader */
+	$(window).on('load', function () {
+			if (readCookie('referer') == null) {
+				$('.preloader-container').delay(700).fadeOut('slow');
+				createCookie('referer', 1, 0);
+	
+			}
+	
+			if (readCookie('referer') != null) {
+	
+				$('.preloader-container').hide();
+			}
+		});
+	
+	/* functions to create and read cookies */
+		function createCookie(name, value, days) {
+			if (days) {
+				var date = new Date();
+				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+				var expires = "; expires=" + date.toGMTString();
+			} else var expires = "";
+			document.cookie = name + "=" + value + expires + "; path=/";
+		}
+	
+		function readCookie(name) {
+			var nameEQ = name + "=";
+			var ca = document.cookie.split(';');
+			for (var i = 0; i < ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+				if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+			}
+			return null;
+		}
+	
+		
+		/* 2 carousel */
+		$('#carousel-2').carousel({
+			interval: 6000,
+			wrap: true,
+			keyboard: true
+		});
+	
+		$('#demo').carousel({
+			interval: 5000,
+			wrap: true,
+			keyboard: true
+		});
+	</script>
+
+
+	
+	{% endblock scripts %}

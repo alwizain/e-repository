@@ -9,7 +9,7 @@ register = template.Library()
 
 @register.filter(name='text_short')
 def text_short(value):
-	temp = value[0:50]
+	temp = value[0:30]
 	return temp
 	
 @register.filter(name='payabletotal')
@@ -19,7 +19,7 @@ def  payabletotal(value):
 
 @register.filter(name='averagerating')
 def averagerating(value, args):
-	temp = value / args
+	temp = value/args
 	if int(temp + 0.5) > int(temp):
 		temp = int(temp + 0.5)
 	else:
