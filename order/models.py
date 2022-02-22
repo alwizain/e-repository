@@ -1,6 +1,8 @@
+from pyexpat import model
 from django.db import models
 from resources.models import Buku
 from django.contrib.auth.models import User
+from datetime import datetime
 
 
 class Pembelian(models.Model):
@@ -14,9 +16,10 @@ class Pembelian(models.Model):
 	nomor_akun = models.CharField(max_length = 20)
 	payable = models.IntegerField()
 	total_buku = models.IntegerField()
-	tgl_transaksi = models.DateTimeField(auto_now_add=True)
+	tgl_transaksi = models.DateTimeField(default=datetime.now, blank=True)
 	update = models.DateTimeField(auto_now=True)
 	bayar = models.BooleanField(default=False)
+	token = models.TextField()
 
 	class Meta:
 		ordering = ('-tgl_transaksi', )

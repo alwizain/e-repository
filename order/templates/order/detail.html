@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load customfunction %}
+
+{% block head %}
+    <script type="text/javascript"
+    src="https://app.sandbox.midtrans.com/snap/snap.js"
+    data-client-key="SB-Mid-client-nxs1-PyH1I2EFoMq"></script>
+{% endblock head %}
+
+{% block header %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script type="text/javascript"
+src="https://app.sandbox.midtrans.com/snap/snap.js"
+data-client-key="SB-Mid-client-nxs1-PyH1I2EFoMq"></script>
+
+{% endblock header %}
+
+{% block content %}
+    <div class="col-md-4 order-md-2 mb-4">
+        <ul class="list-group">
+            <h5>OrderID: <span>#2018{{ order.kd_transaksi }}</span></h5>
+            <h5>Total Item: <span>{{ order.total_buku }}</span></h5>
+            <h5>Nama: <span>{{ order.nama }}</span></h5>
+            <h5>Telepon: <span>{{ order.telepon }}</span></h5>
+            <h5>Email: <span>{{ order.email }}</span></h5>
+            <h5>Account: <span>{{ order.nomor_akun }}</span></h5>
+            <h5>Total Harga: <span>{{ order.payable }}</span></h5>
+            <h5>Metode Pembayaran: <span>{{ order.metode_pembayaran }}</span></h5>
+        </ul>
+        <button id="pay-button">Pay!</button>
+    </div>
+    <script type="text/javascript">
+	      // For example trigger on button clicked, or any time you need
+          var payButton = document.getElementById('pay-button');
+          payButton.addEventListener('click', function () {
+            // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
+            window.snap.pay("{{token}}", {
+              onSuccess: function(result){
+                    /* You may add your own implementation here */
+                    window.location = "https://localhost:8000/order/views/{{ order.kd_transaksi }}";
+              },
+              onPending: function(result){
+                    /* You may add your own implementation here */
+                    window.location = "https://localhost:8000/order/views/{{ order.kd_transaksi }}";
+              },
+              onError: function(result){
+                    /* You may add your own implementation here */
+                    window.location = "https://localhost:8000/order/views/{{ order.kd_transaksi }}";
+              },
+              onClose: function(){
+                    /* You may add your own implementation here */
+                    window.location = "https://localhost:8000/order/views/{{ order.kd_transaksi }}";
+              }
+            })
+          });
+    </script>
+{% endblock %}
+
+    

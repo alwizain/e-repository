@@ -9,11 +9,7 @@ from .forms import OrderCreateForm
 from .pdfcreator import renderPdf
 import midtransclient
 
-snap = midtransclient.Snap(
-    # Set to true if you want Production Environment (accept real transaction).
-    is_production=False,
-    server_key='SB-Mid-server-G7Z6wpDHr-WyoLQIn-k0sewq'
-)
+
 
 def order_create(request):
 	cart = Cart(request)
@@ -21,18 +17,20 @@ def order_create(request):
 		akun = get_object_or_404(User, id=request.user.id)
 		form = OrderCreateForm(request.POST or None, initial={"nama": akun.first_name, "email": akun.email})
 		context = {
-		'subjudul' : "Checkout",
-		'akun' : akun,
-		'form' : form,
-		# 'logo':'img/logo_nav.png',
-		'nav' : [
-			['nav-link','/', 'Home'],
-			['nav-link', '/resources', 'Resources'],
-			['nav-link ', '/panduan', 'Panduan'],
-			['nav-link', '/dokumen', 'Dokumen'],
-			['nav-link active','/bantuan', 'Bantuan'],
-		]
-	}
+			'subjudul' : "Checkout",
+			'akun' : akun,
+			'form' : form,
+			# 'logo':'img/logo_nav.png',
+			'nav' : [
+				['nav-link','/', 'Home'],
+				['nav-link', '/resources', 'Resources'],
+				['nav-link ', '/panduan', 'Panduan'],
+				['nav-link', '/dokumen', 'Dokumen'],
+				['nav-link active','/bantuan', 'Bantuan'],
+			]
+	
+		}
+  
 		if request.method == 'POST':
 			if form.is_valid():
 				order = form.save(commit=False)
@@ -49,12 +47,21 @@ def order_create(request):
 						jumlah=item['jumlah']
 						)
 				cart.clear()
-				context = {
-					'subjudul' : "Checkout",
-					'order' : order,
+				
+				data = {
+					"id_transaksi": order.kd_transaksi,
+					"payable": int(order.payable),
+					"nama": order.nama,
+					"instansi": order.instansi,
+					"email": order.email,
+					"telepon": order.telepon
 				}
-				return render(request, 'order/successfull.html', context)
+    
+				token = midtrans_transaction(request, data=data)
 
+				Pembelian.objects.filter(kd_transaksi=order.kd_transaksi).update(token=token)
+
+				return redirect('order_view', id=order.kd_transaksi)
 			else:
 				messages.error(request, "Fill out your information correctly.")
 
@@ -64,10 +71,22 @@ def order_create(request):
 			return redirect('bukus')
 	else:
 		return redirect('signin')
+
+
+def order_view(request, id):
+    trans = Pembelian.objects.get(pk=id)
+    
+    context = {
+		'subjudul' : "Checkout",
+		'order' : trans,
+		'token' : trans.token
+	}
+    return render(request, 'order/detail.html', context)
 			
 def order_list(request):
-	my_order = Pembelian.objects.filter(Akun_id = request.user.id).order_by('-created')
-	paginator = Paginator(my_order, 5)
+	my_order = Pembelian.objects.filter(Akun_id = request.user.id).order_by('tgl_transaksi')
+	# print(my_order)
+	paginator = Paginator(my_order, 7)
 	page = request.GET.get('page')
 	myorder = paginator.get_page(page)
 	context = {
@@ -102,4 +121,29 @@ class pdf(View):
             "order":query
         }
         article_pdf = renderPdf('order/pdf.html',context)
-        return HttpResponse(article_pdf,content_type='application/pdf')
+        return HttpResponse(article_pdf, content_type='application/pdf')
+
+
+def midtrans_transaction(request, data):
+	snap = midtransclient.Snap(
+		# Set to true if you want Production Environment (accept real transaction).
+		is_production=False,
+		server_key='SB-Mid-server-fIF0krB72BolMmyFluTPjNYt'
+	)
+
+	param = {
+		"transaction_details": {
+			"order_id": data['id_transaksi'],
+			"gross_amount": data['payable']*1000
+		}, "credit_card":{
+			"secure" : True
+		}, "customer_details":{
+			"first_name": data['nama'],
+			"last_name": data['instansi'],
+			"email": data['email'],
+			"phone": data['telepon']
+		}
+	}
+	
+	transaction = snap.create_transaction(param)
+	return transaction['token']

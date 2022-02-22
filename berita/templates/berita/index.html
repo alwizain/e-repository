@@ -29,7 +29,7 @@
       </div>
     </div>
   </div>
-</div>
+
 {% endblock content %}
 {% block scripts %}
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -64,7 +64,7 @@
           <p class="card-text">${data.headline}</p>
           <p class="card-text"><small class="text-muted">${data.tanggal_upload}</small></p>
         </div>
-      </div>
+      </div><br>
       `
       document.getElementById("list-berita").appendChild(wrapperContent);
     })

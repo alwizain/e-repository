@@ -16,14 +16,15 @@
 			                <th scope="col">Qty</th>
 			                <th scope="col">Status</th>
 			                <th scope="col">Date</th>
+							<th scope="col">Aksi</th>
 			            </tr>
 			        </thead>
 			        <tbody class="text-center">
 			            {% for morder in myorder %}
 			            <tr>
 			                <td>{{ forloop.counter }}</td>
-			                <td><a href="{% url 'order:order_details' id=morder.kd_transaksi %}">#2018{{ morder.kd_transaksi }}</a></td>
-			                <td>Rp. {{ morder.payable }}</td>
+			                <td><a href="{% url 'order_details' id=morder.kd_transaksi %}">{{ morder.kd_transaksi }}</a></td>
+			                <td>Rp. {{ morder.payable }}.000</td>
 			                <td>{{ morder.total_buku }}</td>
 			                <td class="text-center">
 			                	{% if morder.bayar == True %}
@@ -33,6 +34,9 @@
 			                	{% endif %}
 			                </td>
 			                <td>{{ morder.tgl_transaksi }}</td>
+							<td>
+								<a href="{% url 'order_view' id=morder.kd_transaksi %}">bayar</a>
+							</td>
 			            </tr>
 			        	{% endfor %}
 			        </tbody>

@@ -3,12 +3,6 @@
 {% load customfunction %}
 {% load crispy_forms_tags %}
 
-{% block head %}
-<script type="text/javascript"
-    src="https://app.sandbox.midtrans.com/snap/snap.js"
-    data-client-key="SB-Mid-client-VJJdiDaNws6X5GlB">
-</script>
-{% endblock head %}
 
 {% block header %}
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -72,13 +66,4 @@
 		</div>
 
 		{% endblock %}
-
-		<script type="text/javascript">
-			// For example trigger on button clicked, or any time you need
-			var payButton = document.getElementById('pay-button');
-			payButton.addEventListener('click', function () {
-			  // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
-			  window.snap.pay('04fbf908-c8f4-42df-ab81-0ef9354be6d8');
-			  // customer will be redirected after completing payment pop-up
-			});
 		</script>
