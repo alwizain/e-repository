@@ -7,6 +7,7 @@ from django.views.static import serve
 
 urlpatterns = [
 	path('', views.index, name='berita'),
+ 	path('<id>', views.detailberita, name='detailberita'),
 ]
 
 if settings.DEBUG:

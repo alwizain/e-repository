@@ -23,28 +23,52 @@
           <li class="layanan_menu list-group-item"><a href="{% url 'kolaborasi' %}">Kolaborasi dengan kami</a></li>
         </ul>
       </div>  
-      <div class="col-sm-10 text-center">
-          <div class="container">
-            <div class="row">
-                <h3>Penguatan Ekosistem Kewirausahaan Politeknik Pos Indonesia Lahirkan Wirausaha Muda</h3><br><br>
-                <img src="../static/img/berita1.jpg" width="700" class="center"><br>
-                <p>
-                    Dilansir dari laman https://jabar.tribunnews.com Strategi dan arah Pendidikan saat ini adalah bagiamana menciptakan mahasiswa yang memiliki kemampuan berupa knowledge, skills dan attitudes serta mampu menerapkan teknologi digital (AI, IoT, Data, IM dan VM). Untuk meningkatkaan kemampuan itu, salah satunya adalah dengan menciptakan Ekosistem Kewirausahaan di lingkungan kampus. Politeknik Pos Indonesia…<br><br><br>
-                </p>
-                <h3>Wisuda ke 18, Politeknik Pos Indonesia kukuhkan sebanyak 519 Wisudawan</h3><br><br>
-                <img src="../static/img/berita2.jpg"  width="700" class="center"><br>
-                <p>
-                    Bandung (16/11/2021) - Sidang Terbuka Senat Politeknik Pos Indonesia (Poltekpos) dengan agenda wisuda Ahli Madya dan Sarjana Tahun Akademik 2020/2021 diselenggarakan pada Selasa (16/11). Dalam kondisi pandemi Covid-19 yang tengah dihadapi saat ini, wisuda Poltekpos dilaksanakan secara daring, melalui Zoom dan disiarkan langsung di kanal Youtube PoltekposTV. Deputi Wakil Direktur…<br><br><br>
-                </p>
-                <h3>Politeknik Pos Indonesia Melakukan MoU dengan Politeknik Penerbangan Jayapura</h3><br><br>
-                <img src="../static/img/berita3.jpg"  width="700" class="center"><br>
-                <p>
-                    Bandung, 08 November 2021 - Dalam rangka meningkatkan mutu lulusan, Politeknik Pos Indonesia selalu berusaha melakukan kerjasama dengan Perguruan Tinggi Lainnya. Dalam pelaksanaannya Politeknik Pos Indonesia melakukan penandatanganan MoU dengan Politeknik Penerbangan Jayapura. Senin, 08 November 2021 di Center Of Technology Politeknik Pos Indonesia. Penandatangan MoU antara Direktur Politeknik Pos…<br><br><br>
-                </p>
-            </div>
+      <div class="col-sm-10 text-left">
+          <div class="d-flex flex-column" id="list-berita">
           </div>
       </div>
     </div>
   </div>
 </div>
 {% endblock content %}
+{% block scripts %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImJ1cmhhbiIsImV4cCI6MTY3NTUyNTI0OSwiZW1haWwiOiJidXJoYW5AbWFpbC5jb20ifQ.RLr6ZHsJW7QWk3mmUI9FIdP9-tNmpY0e7tBQ1kIxTJc'
+  function getNews(){
+    axios.get('http://127.0.0.1:8181/api/berita/',{ 
+        headers: {"Authorization" : `JWT ${token}`
+      } 
+    }
+    ).then((res)=> res.data).then(data => {
+      console.log(data);
+      showNews(data);
+    }).catch((error)=>console.log(error));
+    {% comment %} const instance=axios.get({
+      baseURL:'http://127.0.0.1:8181/api/berita/'
+      headers:{
+          'Content-Type':'application/json',
+                      'Acess-Control-Allow-Origin':'*',
+                      'Authorization':`JWT ${token}`,
+                      'Accept': "application/json"
+          }
+      }) {% endcomment %}
+  }
+  function showNews(data){
+    data.forEach(data => {
+      const wrapperContent = document.createElement('div');
+      wrapperContent.innerHTML = `
+      <div class="card w-75">
+        <div class="card-body">
+          <a class="card-title" href="https://localhost:8000/berita/${data.id}"><h3>${data.judul_berita}</h3></a>
+          <p class="card-text">${data.headline}</p>
+          <p class="card-text"><small class="text-muted">${data.tanggal_upload}</small></p>
+        </div>
+      </div>
+      `
+      document.getElementById("list-berita").appendChild(wrapperContent);
+    })
+  }
+  getNews()
+</script>
+{% endblock scripts%}

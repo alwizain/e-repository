@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+{% endblock header %}
+
+{% block content %}
+	<div class="container-fluid">
+    <div class="container-fluid">
+      <div class="container text-center">
+        <h1 class="display-4"><b>BERITA</b></h1>
+      </div>
+    </div>
+  <br>
+    <div class="row">
+      <div class="col-sm-2">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><h5><b>Layanan</b></h5></li>
+          <li class="layanan_menu list-group-item"><a href="{% url 'jam' %}">Jam Operasional</a></li>
+          <li class="layanan_menu list-group-item"><a href="{% url 'bukus' %}">Buku</a></li>
+          <li class="layanan_menu list-group-item"><a href="{% url 'journals' %}">Jurnal</a></li>
+          <li class="layanan_menu list-group-item"><a href="{% url 'kolaborasi' %}">Kolaborasi dengan kami</a></li>
+        </ul>
+      </div>  
+      <div class="col-sm-10 text-center">
+          <div class="container">
+            <div class="d-flex flex-column" id="detail-berita">
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+{% block scripts %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImJ1cmhhbiIsImV4cCI6MTY3NTUyNTI0OSwiZW1haWwiOiJidXJoYW5AbWFpbC5jb20ifQ.RLr6ZHsJW7QWk3mmUI9FIdP9-tNmpY0e7tBQ1kIxTJc'
+  function getDataById(){
+    
+    axios.get("http://127.0.0.1:8181/api/berita/{{id}}/",{ 
+        headers: {"Authorization" : `JWT ${token}`,
+        'Content-Type':'application/json'
+      } 
+    }
+    ).then((res)=> res.data).then(data => {
+      console.log(data);
+      showNews(data);
+    }).catch((error)=>console.log(error));
+    {% comment %} const instance=axios.get({
+      baseURL:"http://127.0.0.1:8181/api/berita/{{id}}/"
+      headers:{
+          'Content-Type':'application/json',
+                      'Acess-Control-Allow-Origin':'*',
+                      'Authorization':`JWT ${token}`,
+                      'Accept': "application/json"
+          }
+      }) {% endcomment %}
+  }
+  function showNews(data){
+    const wrapperContent = document.createElement('div');
+    wrapperContent.innerHTML = `
+    <h3 class="text-left">
+      ${data.judul_berita}
+    </h3> 
+    <p class="text-left">${data.penulis} <span class="fw-bold">${data.tanggal_upload}</span></p><br>
+    <img src="../static/img/${data.thumbnail}" width="700" alt="${data.thumbnail}"class="center"><br><br>
+    <h5 class="text-justify">
+      ${data.isi}<br><br><br><br>
+    </h5>
+      `
+    document.getElementById("detail-berita").appendChild(wrapperContent);
+  }
+  getDataById()
+</script>
+{% endblock scripts%}
