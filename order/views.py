@@ -15,7 +15,7 @@ def order_create(request):
 	cart = Cart(request)
 	if request.user.is_authenticated:
 		akun = get_object_or_404(User, id=request.user.id)
-		form = OrderCreateForm(request.POST or None, initial={"nama": akun.first_name, "email": akun.email})
+		form = OrderCreateForm(request.POST or None, initial={"nama": akun.first_name, "nama_belakang": akun.last_name, "email": akun.email})
 		context = {
 			'subjudul' : "Checkout",
 			'akun' : akun,
@@ -52,6 +52,7 @@ def order_create(request):
 					"id_transaksi": order.kd_transaksi,
 					"payable": int(order.payable),
 					"nama": order.nama,
+					"nama_belakang": order.nama_belakang,
 					"instansi": order.instansi,
 					"email": order.email,
 					"telepon": order.telepon
@@ -86,14 +87,10 @@ def order_view(request, id):
 def order_list(request):
 	my_order = Pembelian.objects.filter(Akun_id = request.user.id).order_by('tgl_transaksi')
 	# print(my_order)
-	paginator = Paginator(my_order, 7)
-	page = request.GET.get('page')
-	myorder = paginator.get_page(page)
 	context = {
-		'subjudul' : "Checkout",
-		'myorder' : myorder,
+		'subjudul' : "Riwayat Pembelian",
+		'myorder' : my_order,
 	}
-	myorder = paginator.get_page(page)
 
 	return render(request, 'order/list.html', context)
 
@@ -128,18 +125,18 @@ def midtrans_transaction(request, data):
 	snap = midtransclient.Snap(
 		# Set to true if you want Production Environment (accept real transaction).
 		is_production=False,
-		server_key='SB-Mid-server-fIF0krB72BolMmyFluTPjNYt'
+		server_key='SB-Mid-server-G7Z6wpDHr-WyoLQIn-k0sewq'
 	)
 
 	param = {
 		"transaction_details": {
 			"order_id": data['id_transaksi'],
-			"gross_amount": data['payable']*1000
+			"gross_amount": data['payable']
 		}, "credit_card":{
 			"secure" : True
 		}, "customer_details":{
 			"first_name": data['nama'],
-			"last_name": data['instansi'],
+			"last_name": data['nama_belakang'],
 			"email": data['email'],
 			"phone": data['telepon']
 		}

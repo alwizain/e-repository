@@ -11,7 +11,7 @@
 			<h1 style="position: relative; text-align: center;">Nota Pembelian</h1>
 			<h1>Detail Pembeli</h1>
 			<address contenteditable>
-				<p><b>Pembeli :</b> {{ order.nama }}</p>
+				<p><b>Pembeli :</b> {{ order.nama }} {{ order.nama_belakang }}</p>
 				<p><b>Instansi :</b> {{ order.instansi }}</p>
 				<p><b>Telepon :</b> {{ order.telepon }}</p>
 				<p><b>Alamat Email :</b> {{ order.email }}</p>
@@ -40,7 +40,7 @@
 					<tr>
 						<td><span contenteditable>#2022{{ order.kd_transaksi }}</span></td>
 						<td><span contenteditable>{{ order.tgl_transaksi }}</span></td>
-						<td><span contenteditable>{{ order.metode_pembayaran }}</span></td>
+						<td><span contenteditable>Midtrans</span></td>
 					</tr>
 				</tbody>
 			</table>

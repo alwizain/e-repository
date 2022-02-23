@@ -5,31 +5,106 @@
 {% block head %}
     <script type="text/javascript"
     src="https://app.sandbox.midtrans.com/snap/snap.js"
-    data-client-key="SB-Mid-client-nxs1-PyH1I2EFoMq"></script>
+    data-client-key="SB-Mid-client-VJJdiDaNws6X5GlB"></script>
 {% endblock head %}
 
 {% block header %}
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script type="text/javascript"
 src="https://app.sandbox.midtrans.com/snap/snap.js"
-data-client-key="SB-Mid-client-nxs1-PyH1I2EFoMq"></script>
+data-client-key="SB-Mid-client-VJJdiDaNws6X5GlB"></script>
 
 {% endblock header %}
 
 {% block content %}
-    <div class="col-md-4 order-md-2 mb-4">
-        <ul class="list-group">
-            <h5>OrderID: <span>#2018{{ order.kd_transaksi }}</span></h5>
-            <h5>Total Item: <span>{{ order.total_buku }}</span></h5>
-            <h5>Nama: <span>{{ order.nama }}</span></h5>
-            <h5>Telepon: <span>{{ order.telepon }}</span></h5>
-            <h5>Email: <span>{{ order.email }}</span></h5>
-            <h5>Account: <span>{{ order.nomor_akun }}</span></h5>
-            <h5>Total Harga: <span>{{ order.payable }}</span></h5>
-            <h5>Metode Pembayaran: <span>{{ order.metode_pembayaran }}</span></h5>
-        </ul>
-        <button id="pay-button">Pay!</button>
-    </div>
+
+      <div class="receipt-content">
+            <div class="container">
+                  <div class="row">
+                        <div class="col-md-12">
+                              <div class="invoice-wrapper">
+                                    <div class="successful-order text-center">
+                                          <h3 class="page-header">Detail Pembayaran</h3>
+                                    </div>
+  
+                                    <br>
+                      
+                                    <div class="intro">
+                                          Hai! <strong>{{ order.nama }} {{ order.nama_belakang }}</strong>, 
+                                          <br>
+                                          Silahkan melanjutkan ke proses checkout jika data yang Anda isikan sudah benar. Total tagihan yang harus Anda bayar sebesar <strong>Rp. {{ order.payable }}</strong>. 
+                                    </div>
+  
+                                    
+  
+                                    <div class="payment-info">
+                                          <div class="row">
+                                                <div class="col-sm-12">
+                                                      <span>No. Transaksi</span>
+                                                      <br>
+                                                      <strong>#2022{{ order.kd_transaksi }}</strong>
+                                                </div>
+                                                
+                                                <div class="col-sm-6">
+                                                      <span>Nama</span>
+                                                      <br>
+                                                      <strong>{{ order.nama }} {{ order.nama_belakang }}</strong>
+                                                </div>
+                                                
+                                                <div class="col-sm-6">
+                                                      <span>Email</span>
+                                                      <br>
+                                                      <strong>{{ order.email }}</strong>
+                                                </div>
+                                                
+                                                <div class="col-sm-6">
+                                                      <span>Telepon</span>
+                                                      <br>
+                                                      <strong>{{ order.telepon }}</strong>
+                                                </div>
+                                                
+                                                <div class="col-sm-6">
+                                                      <span>Metode Pembayaran</span>
+                                                      <br>
+                                                      <strong>Midtrans</strong>
+                                                </div>
+                                                                           
+                                                <div class="col-sm-6">
+                                                      <span>Total Item</span>
+                                                      <br>
+                                                      <strong>{{ order.total_buku }}</strong>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                      <span>Total Harga</span>
+                                                      <br>
+                                                      <strong>Rp. {{ order.payable }}</strong>
+                                                </div>
+                                          </div>
+                                    </div>
+                      
+                                    <br>
+  
+                                    <div class="catatan">
+                                          <h6><b>Catatan.</b></h6>
+                                          <p>Pembayaran akan segera diproses secepatnya!</p>
+                                    </div>
+                          
+                                    <br>
+  
+                                    <div class="print text-center">
+                                          <button id="pay-button" class="btn btn-success">Checkout!</button>
+                                    </div>
+                          
+                                    <br>
+  
+                              </div>
+                        </div>
+                  
+                  </div>
+            </div>
+      </div> <br><br><br>
+
     <script type="text/javascript">
 	      // For example trigger on button clicked, or any time you need
           var payButton = document.getElementById('pay-button');
@@ -38,19 +113,19 @@ data-client-key="SB-Mid-client-nxs1-PyH1I2EFoMq"></script>
             window.snap.pay("{{token}}", {
               onSuccess: function(result){
                     /* You may add your own implementation here */
-                    window.location = "https://localhost:8000/order/views/{{ order.kd_transaksi }}";
+                    window.location = "https://localhost:8000/order/";
               },
               onPending: function(result){
                     /* You may add your own implementation here */
-                    window.location = "https://localhost:8000/order/views/{{ order.kd_transaksi }}";
+                    window.location = "https://localhost:8000/order/";
               },
               onError: function(result){
                     /* You may add your own implementation here */
-                    window.location = "https://localhost:8000/order/views/{{ order.kd_transaksi }}";
+                    window.location = "https://localhost:8000/order/";
               },
               onClose: function(){
                     /* You may add your own implementation here */
-                    window.location = "https://localhost:8000/order/views/{{ order.kd_transaksi }}";
+                    window.location = "https://localhost:8000/order/";
               }
             })
           });

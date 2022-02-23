@@ -20,7 +20,7 @@
                     <br>
                     
                     <div class="intro">
-                        Hai! <strong>{{ order.nama }}</strong>, 
+                        Hai! <strong>{{ order.nama }} {{ order.nama_belakang }}</strong>, 
                         <br>
                         Berikut merupakan nota pembayaran untuk pembelian kamu seharga <strong>Rp. {{ order.payable }}</strong>
                     </div>
@@ -42,7 +42,7 @@
                             <div class="col-sm-6">
                                 <span>Metode Pembayaran</span>
                                 <br>
-                                <strong>{{ order.metode_pembayaran }}</strong>
+                                <strong>Midtrans</strong>
                             </div>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
 								<span>Detail Pembeli</span>
                                 <br>
 								<strong>
-									{{ order.nama }}
+									{{ order.nama }} {{ order.nama_belakang }}
 								</strong>
 								<p>
 									{{ order.instansi }} <br>

@@ -30,25 +30,19 @@
 			                </div>
 			                <div class="col-md-6 mb-3">
 			                  
-			                   	{{ form.email|as_crispy_field }}
+			                   	{{ form.nama_belakang|as_crispy_field }}
 			                </div>
 			            </div>
 	           			<div class="mb-3">
+			                {{ form.email|as_crispy_field }}
+			            </div>
+
+						<div class="mb-3">
 			                {{ form.telepon|as_crispy_field }}
 			            </div>
 
 			            <div class="mb-3">
 			                {{ form.instansi|as_crispy_field }}
-			            </div>
-			            <hr class="mb-4">
-			            <div class="d-block my-3">
-							{{ form.metode_pembayaran|as_crispy_field }}
-			            </div>
-			            <div class="row">
-			                <div class="col-md-6 mb-3">
-			                    {{ form.nomor_akun|as_crispy_field }}
-			                  
-			                </div>
 			            </div>
 			            <hr class="mb-4">
 			            <button id='pay-button' class="btn btn-warning btn-block" style="margin-bottom: 20px">Checkout</button>
