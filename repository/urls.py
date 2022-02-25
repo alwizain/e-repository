@@ -34,7 +34,6 @@ urlpatterns = [
     path('bantuan/', include('bantuan.urls')),
     path('jam/', include('jam.urls')),
     path('berita/', include('berita.urls')),
-    path('kolaborasi/', include('kolaborasi.urls')),
     path('cart/', include('cart.urls')),
     path('order/', include('order.urls')),
     
