@@ -2,12 +2,6 @@
 {% load static %}
 {% load customfunction %}
 
-{% block head %}
-	<!-- Rating CSS -->
-    <!-- Reset styles -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
-{% endblock head %}
-
 {% block header %}
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 {% endblock header %}
@@ -55,8 +49,7 @@
 </div>
 <!-- End boostrap modal -->
 
-<!-- Rating JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+
 
 {% block content %}
 
@@ -90,7 +83,7 @@
 
 					<div class="titleheader">
 						<h3 class="h2header text-center">Buku Terbaru</h3>
-						<h5 class="h5link text-center"><a href="{% url 'bukus' %}">Lihat</a></h5>
+						<h5 class="h5link text-center"><a href="{% url 'bukus' %}">Lihat Semua</a></h5>
 					</div>
 					<div class="regulara sliderzx">
 						{% for item in newbooks %}
@@ -104,6 +97,10 @@
 								{{ item.totalrating|averagerating:item.totalreview }}
 								<span class="totalrating">{{ item.totalreview|add:-1 }}</span>
 							</div>
+							<p>Rp. {{ item.harga }}</p>
+							<button class="btn btn-warning" id="addTocart" data-buku-id="{{ item.id_buku }}">
+								<i class="fa fa-shopping-cart"></i> Keranjang
+							</button>
 						</div>
 						{% endfor %}
 					</div>
@@ -113,7 +110,7 @@
 
 					<div class="titleheader">
 						<h3 class="h2header text-center">Journal Terbaru</h3>
-						<h5 class="h5link text-center"><a href="{% url 'journals' %}">Lihat</a></h5>
+						<h5 class="h5link text-center"><a href="{% url 'journals' %}">Lihat Semua</a></h5>
 					</div>
 					<div class="regulara sliderzx text-center">
 						{% for j in newjournal %}
@@ -129,32 +126,7 @@
 					<br><br><br><br>
 
 					<div class="titleheader">
-						<h3 class="h2header text-center">Buku Pilihan Pelanggan</h3>
-					</div>
-					<div class="regulara sliderzx text-center">
-						{% for p in ratingbuku %}
-						<div class="book-wrapper text-center">
-							<div class="coverpage">
-								<img src="{{ p.cover.url }}"/>
-							</div>
-							<a href="{% url 'buku' id=p.id_buku %}">{{ p.jdl_buku|text_short }}</a>
-							<a href="{% url 'pengarang' id=p.pengarang.id_pengarang %}">{{ p.pengarang }}</a>
-							<div class="rating">
-								{{ p.totalrating|averagerating:p.totalreview }}
-								<span class="totalrating">{{ p.totalreview|add:-1 }}</span>
-							</div>
-							<p>Rp. {{ p.harga }}</p>
-							<button class="btn btn-warning" id="addTocart" data-buku-id="{{ p.id_buku }}">
-									<i class="fa fa-shopping-cart"></i> Keranjang
-								</button>
-						</div>
-						{% endfor %}
-					</div>
-					
-					<br><br><br><br>
-
-					<div class="titleheader">
-						<h3 class="h2header text-center">Popular Among Users</h3>
+						<h3 class="h2header text-center">Buku Rekomendasi</h3>
 						<h5 class="h5link text-center"><a href="{% url 'rbooks' %}">Lihat Semua</a></h5>
 					</div>
 					<div class="regulara sliderzx text-center">
@@ -164,25 +136,21 @@
 								<img src="{{ p.image_url }}"/>
 							</div>
 							<a href="{% url 'rbuku' bookid=p.book_id %}">{{ p.original_title|truncatechars:30 }}</a>
-							<a href="#">{{ p.authors|truncatechars:15 }}</a>
+							<a>{{ p.authors|truncatechars:15 }}</a>
 							<div class="rating">
 								{{ p.average_rating|averagerating:1 }}
 							</div>
 
-							<a href="javascript:;" onclick='bookDetails(this)' class="btn more-details"
-                            data-book-id="{{ book.book_id }}">More Details</a>
+							<p>Beri Nilai Untuk Buku Ini</p>
                         
                             {% if user.is_authenticated %}
-							<div class='rating-block' id='rating-block-{{ book.book_id }}' onmouseover="rateStart(this)"
-								onclick='rateBook(this)' onmouseout='finishRate(this)' data-book-id="{{ book.book_id }}">
-								<div id='button-text-{{ book.book_id }}'>Rate <i class="fa fa-heart" style="color:red"></i>
-									This Book</a>
-								</div>
-								<div class='rateYo' id='rate-{{ book.book_id }}'></div>
+							<div class='rating-block text-center' id='rating-block-{{ p.book_id }}' onmouseover="rateStart(this)"
+								onclick='rateBook(this)' data-book-id="{{ p.book_id }}">
+								<div class='rateYo text-center' id='rate-{{ p.book_id }}'></div>
 							</div>
 							{% else %}
-							<div class='rating-block btn' onclick="location.href='#'">
-								<div id='button-text'>Rate <i class="fa fa-heart" style="color:red"></i> This Book
+							<div class='rating-block btn btn-warning text-center' onclick="location.href='{% url 'signin' %}'">
+								<div id='button-text'>Login
 									</a>
 								</div>
 							</div>
@@ -198,59 +166,61 @@
 <br><br><br><br>
 {% endblock content %}
 
-
-{% block scripts %}
 <script type="text/javascript">
-
 	/* preloader */
 	$(window).on('load', function () {
-			if (readCookie('referer') == null) {
-				$('.preloader-container').delay(700).fadeOut('slow');
-				createCookie('referer', 1, 0);
-	
-			}
-	
-			if (readCookie('referer') != null) {
-	
-				$('.preloader-container').hide();
-			}
-		});
-	
-	/* functions to create and read cookies */
-		function createCookie(name, value, days) {
-			if (days) {
-				var date = new Date();
-				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-				var expires = "; expires=" + date.toGMTString();
-			} else var expires = "";
-			document.cookie = name + "=" + value + expires + "; path=/";
-		}
-	
-		function readCookie(name) {
-			var nameEQ = name + "=";
-			var ca = document.cookie.split(';');
-			for (var i = 0; i < ca.length; i++) {
-				var c = ca[i];
-				while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-				if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-			}
-			return null;
-		}
-	
+        if (readCookie('referer') == null) {
+            $('.preloader-container').delay(700).fadeOut('slow');
+            createCookie('referer', 1, 0);
+
+        }
+
+        if (readCookie('referer') != null) {
+
+            $('.preloader-container').hide();
+        }
+    });
+
+/* functions to create and read cookies */
+    function createCookie(name, value, days) {
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            var expires = "; expires=" + date.toGMTString();
+        } else var expires = "";
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
 		
-		/* 2 carousel */
-		$('#carousel-2').carousel({
-			interval: 6000,
-			wrap: true,
-			keyboard: true
-		});
-	
-		$('#demo').carousel({
-			interval: 5000,
-			wrap: true,
-			keyboard: true
-		});
-	</script>
+	/* 2 carousel */
+	$('#carousel-2').carousel({
+		interval: 6000,
+		wrap: true,
+		keyboard: true
+	});
+
+	$('#demo').carousel({
+		interval: 5000,
+		wrap: true,
+		keyboard: true
+	});
+
+        
+</script>
+
+
+{% block scripts %}
 
 
 	

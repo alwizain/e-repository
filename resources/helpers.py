@@ -294,7 +294,7 @@ def get_book_dict(bookid_list):
     return rec_books_dict
 
 
-def combine_ids(tfidf_bookids, embedding_bookids, already_rated, recommendations=9):
+def combine_ids(tfidf_bookids, embedding_bookids, already_rated, recommendations=10):
     """Return best bookids combining both approaches.
 
         Embedding - Top 6
@@ -402,7 +402,7 @@ def get_top_n(top_n=400):
     return qualified.sample(top_n)
 
 
-def popular_among_users(N=15):
+def popular_among_users(N=50):
     """Return Popular Books Among Users in the rating range 4-5.
 
         If enough books are not available, top books are

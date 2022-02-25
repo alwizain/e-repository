@@ -3,6 +3,12 @@
 {% load crispy_forms_tags %}
 {% load customfunction %}
 
+{% block head %}
+	<!-- Rating CSS -->
+    <!-- Reset styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+{% endblock head %}
+
 {% block header %}
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 {% endblock header %}
@@ -23,108 +29,88 @@
 			
 						<div class="col-sm-10">
 							<div class="product-information">
-								<h4>{{ buku.original_title }}</h4>
-								<p style="margin: 0px">by <a style="font-weight:bold" href="#">{{ buku.authors }}</a></p>
+								<h4 style="font-weight:bold">{{ buku.original_title }}</h4>
+								<p style="margin: 0px">by <a style="font-weight:bold">{{ buku.authors }}</a></p>
 								<div class='rating'>
 								</div>
 								<article class="text-justify" style="margin-top:10px;">
 									{{ buku.desc }}
 								</article>
+								<br>
+								<b><p style="color:#ffa600">Beri Nilai Untuk Buku Ini</p></b>
+								<div class="rating-book">
+									{% if user.is_authenticated %}
+										<div class='rating-block text-center' id='rating-block-{{ buku.book_id }}' onmouseover="rateStart(this)"
+											onclick='rateBook(this)' data-book-id="{{ buku.book_id }}">
+											<div class='rateYo text-center' id='rate-{{ buku.book_id }}'></div>
+										</div>
+										{% else %}
+										<div class='rating-block btn btn-warning text-center' onclick="location.href='{% url 'signin' %}'">
+											<div id='button-text'>Login
+												</a>
+											</div>
+										</div>
+									{% endif %}
+								</div>
 
 							</div>
 						</div>
 					</div>	
 				</div>
 				
-			    <div class="col-sm-9 mt-5" id="getreview">
-					{% if messages %}
-						<div class="messages">
-						    {% for message in messages %}
-						    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-						    {% endfor %}
-						</div>
-					{% endif %}	
-					<div class="rating-stars text-left">
-						<ul id="stars">
-						  <li id="azaa" class="star" data-value="1"> <i class="fa fa-star fa-fw"></i> </li>
-						  <li id="azbb" class="star" data-value="2"> <i class="fa fa-star fa-fw"></i> </li>
-						  <li id="azcc" class="star" data-value="3"> <i class="fa fa-star fa-fw"></i> </li>
-						  <li id="azdd" class="star" data-value="4"> <i class="fa fa-star fa-fw"></i> </li>
-						  <li id="azee" class="star" data-value="5"> <i class="fa fa-star fa-fw"></i> </li>
-						</ul>
-					</div>
 
-					<form action="" method="POST" class="needs-validation" novalidate="">
-						{% csrf_token %}
-					 
-						 <div class="form-group">
-							 {{ form.bookrating|as_crispy_field }}
-						 </div>
-						 <br>
-						 
-						 <div class="form-group">
-							 <button class="btn btn-warning" type="submit" style="color: #fff">Submit </button>
-						 </div>
-					</form>	
-
-				<div class="col-sm-12">	
+				<div class="col-sm-12 text-center">	
 					<div class="titleheader">
 						<h3 class="h2header text-center">Buku Lainnya</h3>
 					</div>
+					{% if user.is_authenticated %}
+					<div class="regulara sliderzx text-center">
+						{% for item in books %}
+						<div class="book-wrapper text-center">
+							<div class="coverpage">
+								<img src="{{ item.image_url }}"/>
+							</div>
+							<a href="{% url 'rbuku' bookid=item.book_id %}">{{ item.original_title|truncatechars:30 }}</a>
+							<a>{{ item.authors|truncatechars:15 }}</a>
+							<div class="rating">
+								{{ item.average_rating|averagerating:1 }}
+							</div>
+
+							<p>Beri Nilai Untuk Buku Ini</p>
+                        
+							<div class='rating-block text-center' id='rating-block-{{ item.book_id }}' onmouseover="rateStart(this)"
+								onclick='rateBook(this)' data-book-id="{{ item.book_id }}">
+								<div class='rateYo text-center' id='rate-{{ item.book_id }}'></div>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+					
+					{% else %}
+					
 					<div class="regulara sliderzx text-center">
 						{% for item in rekombuku %}
 						<div class="book-wrapper text-center">
 							<div class="coverpage">
-								<img src="{{ item.cover.url }}"/>
+								<img src="{{ item.image_url }}"/>
 							</div>
-							<a href="{% url 'buku' id=item.id_buku %}">{{ item.jdl_buku|text_short }}</a>
-                            <a href="{% url 'pengarang' id=item.pengarang.id_pengarang %}">{{ item.pengarang }}</a>
+							<a href="{% url 'rbuku' bookid=item.book_id %}">{{ item.original_title|truncatechars:30 }}</a>
+							<a>{{ item.authors|truncatechars:15 }}</a>
 							<div class="rating">
-								{{ item.totalrating|averagerating:item.totalreview }}
-								<span class="totalrating">{{ item.totalreview|add:-1 }}</span>
+								{{ item.average_rating|averagerating:1 }}
 							</div>
-							<p>Rp. {{ item.harga }}</p>
+
+							<p>Beri Nilai Untuk Buku Ini</p>
+                        
+							<div class='rating-block btn btn-warning text-center' onclick="location.href='{% url 'signin' %}'">
+								<div id='button-text'>Login
+									</a>
+								</div>
+							</div>
 						</div>
 						{% endfor %}
 					</div>
-				</div>
-					
-				<div class="col-sm-9 mt-5" id="getreview"></div>
-					<div class="d-pagination">
-					    <ul class="pagination">
-						{% if rreview.has_previous %}
-							<li class="page-item">
-								<a class="page-link" href="?page=1">First</a>
-							</li>								
-							<li class="page-item">
-								<a class="page-link" href="?page={{ rreview.previous_page_number }}">Previous</a>
-							</li>
-						{% endif %}
-						{% for ord in rreview.paginator.page_range %}
-							{% if rreview.number == ord %}
-								<li class="page-item active">
-									<span class="page-link">{{ ord }}
-										<span class="sr-only">(current)</span>
-									</span>
-								</li>
-							{% elif ord > rreview.number|add:'-3' and ord < rreview.number|add:'3' %}
-								<li class="page-item">
-									<a class="page-link" href="?page={{ ord }}">{{ ord }}</a>
-								</li>
-
-							{% endif %}
-
-						{% endfor %}
-						 {% if rreview.has_next %}
-							<li class="page-item">
-								<a class="page-link" href="?page={{ rreview.next_page_number }}">Next</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="?page={{ rreview.paginator.num_pages }}">Last</a>
-							</li>
-						{% endif %}
-					    </ul>
-					</div>		
+					{% endif %}
 				</div>
 			</div>
 		</div>
@@ -132,6 +118,8 @@
 
 {% endblock %}
 
+<!-- Rating JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 
 {% block scripts %}
 <script type="text/javascript">

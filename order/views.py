@@ -85,7 +85,7 @@ def order_view(request, id):
     return render(request, 'order/detail.html', context)
 			
 def order_list(request):
-	my_order = Pembelian.objects.filter(Akun_id = request.user.id).order_by('tgl_transaksi')
+	my_order = Pembelian.objects.filter(Akun_id = request.user.id).order_by('-tgl_transaksi')
 	# print(my_order)
 	context = {
 		'subjudul' : "Riwayat Pembelian",

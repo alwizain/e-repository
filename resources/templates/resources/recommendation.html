@@ -10,21 +10,34 @@
     <div class="container-fluid">
         <div class="container-fluid">
 			<div class="row">
-				<div class = 'col-sm-10'>
+				<div class = 'col-sm-12 text-center'>
+                    <div class="titleheader">
+						<h3 class="h2header text-center">Rekomendasi Buku Untuk Kamu</h3>
+					</div>
+                    <br>
                     {% for book in books %}
                     <div class="book-wrapper text-center">
                         <div class="coverpage">
                             <img src="{{ book.image_url }}"/>
                         </div>
-                        <a href="#">{{ book.original_title|truncatechars:30 }}</a>
-                        <a href="#">{{ book.authors|truncatechars:15 }}</a>
+                        <a href="{% url 'rbuku' bookid=book.book_id %}">{{ book.original_title|truncatechars:30 }}</a>
+                        <a>{{ book.authors|truncatechars:15 }}</a>
                         <div class="rating">
                             {{ book.average_rating|averagerating:1 }}
                         </div>
+                        
+                        <p>Beri Nilai Untuk Buku Ini</p>
+                    
+                        <div class='rating-block text-center' id='rating-block-{{ book.book_id }}' onmouseover="rateStart(this)"
+                            onclick='rateBook(this)' data-book-id="{{ book.book_id }}">
+                            <div class='rateYo text-center' id='rate-{{ book.book_id }}'></div>
+                        </div>
+                
                     </div>
                     {% endfor %}
                 </div>
             </div>
         </div>
     </div>
+    <br><br>
 {% endblock %}

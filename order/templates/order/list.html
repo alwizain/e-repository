@@ -30,15 +30,14 @@
 			                	{% if morder.bayar == True %}
 			                	<p class="status1">Confirmed</p>
 			                	{% else %}
-			                	<p class="status3">Processing</p>
+			                	<p class="status3">Pending</p>
 			                	{% endif %}
 			                </td>
 			                <td>{{ morder.tgl_transaksi }}</td>
 							<td>
 								{% if morder.bayar == True %}
 									<div class="btn-group">
-										<a href="{% url 'pdf' id=morder.kd_transaksi %}" class="btn btn-outline-dark btn-sm">Nota</a>
-										<a href="#" class="btn btn-outline-dark btn-sm">Link</a>
+										<a href="{% url 'pdf' id=morder.kd_transaksi %}" target="blank" class="btn btn-outline-dark btn-sm">Nota</a>
 									</div>
 			                	{% else %}
 			                	<a href="{% url 'order_view' id=morder.kd_transaksi %}" class="btn btn-outline-dark btn-sm">Bayar</a>
