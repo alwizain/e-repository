@@ -24,7 +24,7 @@
             <div class="coverpage">
                 <img src="{{ item.cover.url }}"/>
             </div>
-            <a href="{% url 'buku' id=item.id_buku %}">{{ item.jdl_buku }}</a>
+            <a href="{% url 'buku' id=item.id_buku %}">{{ item.jdl_buku|text_short }}</a>
             <a href="{% url 'pengarang' id=item.pengarang.id_pengarang %}">{{ item.pengarang }}</a>
             <div class="rating">
                 {{ item.totalrating|averagerating:item.totalreview }}

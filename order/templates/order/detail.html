@@ -113,19 +113,19 @@ data-client-key="SB-Mid-client-VJJdiDaNws6X5GlB"></script>
             window.snap.pay("{{token}}", {
               onSuccess: function(result){
                     /* You may add your own implementation here */
-                    window.location = "https://localhost:8000/order/";
+                    window.location = "{% url 'order_list' %}";
               },
               onPending: function(result){
                     /* You may add your own implementation here */
-                    window.location = "https://localhost:8000/order/";
+                    window.location = "{% url 'order_list' %}";
               },
               onError: function(result){
                     /* You may add your own implementation here */
-                    window.location = "https://localhost:8000/order/";
+                    window.location = "{% url 'order_list' %}";
               },
               onClose: function(){
                     /* You may add your own implementation here */
-                    window.location = "https://localhost:8000/order/";
+                    window.location = "{% url 'order_list' %}";
               }
             })
           });

@@ -37,7 +37,7 @@
 							<td>
 								{% if morder.bayar == True %}
 									<div class="btn-group">
-										<a href="{% url 'pdf' id=morder.kd_transaksi %}" target="blank" class="btn btn-outline-dark btn-sm">Nota</a>
+										<a href="{% url 'pdf' id=morder.kd_transaksi %}" class="btn btn-outline-dark btn-sm">Nota</a>
 									</div>
 			                	{% else %}
 			                	<a href="{% url 'order_view' id=morder.kd_transaksi %}" class="btn btn-outline-dark btn-sm">Bayar</a>

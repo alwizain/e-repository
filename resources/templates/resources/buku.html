@@ -19,7 +19,6 @@
 								{% for item in cat %}
 								<li class="kategori_menu list-group-item"><a href="{% url 'kategori' id=item.id_kategori %}">{{ item.nama_kategori }}</a></li>
 								{% endfor %}
-								
 							</ul>
 						</div>
 						<div class="col-sm-2">
@@ -133,7 +132,7 @@
 					</div>
 				</div>
 					
-				<div class="col-sm-9 mt-5" id="getreview"></div>
+				<div class="col-sm-9 mt-5" id="getreview">
 					<div class="d-pagination">
 					    <ul class="pagination">
 						{% if rreview.has_previous %}
