@@ -42,49 +42,6 @@
     </div>
     {% endfor %}
 
-	 <!-- Bootstrap modal -->
-	 <div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="booktitle">Basic Modal</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-	
-						<div class="col-8">
-							<strong>Summary: </strong><br>
-							<img id="loading" src="{% static '/img/loading.gif' %}">
-							<p id="booksummary">
-	
-							</p>
-							<strong>Authors:</strong>
-							<p id="bookauthors">
-							</p>
-	
-							<div id="bookrating"></div>
-						</div>
-	
-						<div class="col-4">
-							<img class="img-book" src="" id="bookimage">
-						</div>
-						{% if user.is_authenticated %}
-						<button id="save-book-button" class="btn">Save for Later</button> 
-						{%endif%}
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	</div>
-	<!-- End boostrap modal -->
-
 	<br>
 
 	<div id="container">
@@ -93,7 +50,7 @@
 					
 		{% endblock %}
 
-	<div id="snackbar"></div>
+		<div id="snackbar"></div>
 
 		{% include "snippets/footer.html" %}
 	
@@ -108,45 +65,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 
 	<script>
-	// get book summary
-        function getsummary(bookid) {
-            $.ajax({
-                data: {
-                    'bookid': bookid,
-                    'csrfmiddlewaretoken': Cookies.get('csrftoken')
-                },
-                dataType: 'json',
-                url: "{% url 'summary_ajax' %}",
-                type: 'POST',
-                success: function(response) {
-                    $('#loading').hide();
-                    $('#booksummary').text(response['booksummary']);
-                },
-                error: function(response) {
-                    console.log(response)
-                }
-            })
-        }
-	// display book boostrap modal when clicked
-	function openModal(obj) {
-		$('#booksummary').text("");
-		$('#loading').show();
-		var bookid = obj.getAttribute('data-bookid');
-		var summary = getsummary(bookid);
-		var bookName = obj.innerHTML;
-		var authors = obj.getAttribute('data-authors');
-		var imageurl = obj.getAttribute('data-imageurl');
-		var averagerating = obj.getAttribute('data-averagerating');
-		$('#booktitle').text(bookName);
-		$('#bookauthors').text(authors);
-		$('#bookimage').attr('src', imageurl);
-		$("#bookrating").rateYo({
-			rating: averagerating,
-			readOnly: true
-		});
-		$('#bookModal').modal('show');
-		$('#search-dropdown').empty();
-	}
+	
 
 	$("#bookName").focus(function() {
 			$('#search-dropdown').show();

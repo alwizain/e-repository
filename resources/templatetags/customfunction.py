@@ -11,6 +11,11 @@ register = template.Library()
 def text_short(value):
 	temp = value[0:20]
 	return temp
+
+@register.filter(name='abstrak_short')
+def abstrak_short(value):
+	temp = value[0:200]
+	return temp
 	
 @register.filter(name='payabletotal')
 def  payabletotal(value):

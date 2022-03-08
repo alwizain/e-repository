@@ -4,8 +4,8 @@ from django.http import HttpResponse
 # Create your views here.
 def index(request):
     context = {
-		'judul' : 'Jam Operasional',
-		'subjudul' : "Jam Operasional",
+		'judul' : 'Berita',
+		'subjudul' : "Berita",
 		# 'logo':'img/logo_nav.png',
 		'nav' : [
 			['nav-link','/', 'Home'],
@@ -19,8 +19,8 @@ def index(request):
 
 def detailberita(request, id):
     context = {
-		'judul' : 'Jam Operasional',
-		'subjudul' : "Jam Operasional",
+		'judul' : 'Berita',
+		'subjudul' : "Berita",
 		'id' : id,
 		# 'logo':'img/logo_nav.png',
 		'nav' : [

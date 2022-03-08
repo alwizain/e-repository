@@ -35,8 +35,8 @@ def cart_details(request):
 	cart = Cart(request)
 	context = {
 		"cart": cart,
-        'judul' : 'List Order',
-		'subjudul' : "List Order",
+        'judul' : 'Keranjang',
+		'subjudul' : "Keranjang",
 		'nav' : [
 			['nav-link','/', 'Home'],
 			['nav-link active', '/resources', 'Resources'],

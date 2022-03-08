@@ -93,8 +93,8 @@ def get_journal(request, id):
 	data_kategori = Kategori_Journal.objects.all()
 
 	context = {
-		'judul' : 'Jurnal',
-		'journal':data_journal,
+		'subjudul' : 'Jurnal',
+		'jurnal':data_journal,
 		'kategori':data_kategori,
 		'nav' : [
 			['nav-link','/', 'Home'],
