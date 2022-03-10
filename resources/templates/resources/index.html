@@ -11,108 +11,106 @@
 	<div class="container-fluid">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-sm-2">
-					<div class="product-information">
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item"><h5><b>Resources</b></h5></li>
-							<li class="layanan_menu list-group-item"><a href="{% url 'bukus' %}">Buku</a></li>
-							<li class="layanan_menu list-group-item"><a href="{% url 'journals' %}">Jurnal</a></li>
-							<li class="layanan_menu list-group-item"><a href="{% url 'book_recommendations' %}">Rekomendasi</a></li>
-						</ul>
-						<br>
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item"><h5><b>Layanan Lainnya</b></h5></li>
-							<li class="layanan_menu list-group-item"><a href="{% url 'berita' %}">Berita</a></li>
-							<li class="layanan_menu list-group-item"><a href="/panduan">panduan</a></li>
-							<li class="layanan_menu list-group-item"><a href="/dokumen">Unduh Dokumen Petunjuk</a></li>
-						</ul>
-					</div>
+				<div class="col-sm-2 border-right">
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item"><h5><b>Resources</b></h5></li>
+						<div class="border border-bottom"></div>
+						<li class="layanan_menu list-group-item"><a href="{% url 'bukus' %}">Buku</a></li>
+						<li class="layanan_menu list-group-item"><a href="{% url 'journals' %}">Jurnal</a></li>
+						<li class="layanan_menu list-group-item"><a href="{% url 'book_recommendations' %}">Rekomendasi</a></li>
+					</ul>
+					<br>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item"><h5><b>Layanan Lainnya</b></h5></li>
+						<div class="border border-bottom"></div>
+						<li class="layanan_menu list-group-item"><a href="{% url 'berita' %}">Berita</a></li>
+						<li class="layanan_menu list-group-item"><a href="/panduan">panduan</a></li>
+						<li class="layanan_menu list-group-item"><a href="/dokumen">Unduh Dokumen Petunjuk</a></li>
+					</ul>
 				</div>
 				<div class="col-sm-10">
-					<div class="product-information">
-						<div class="container text-center">
-							<p class="lead"><b>Untuk memenuhi kebutuhan pemustaka, kami menyediakan berbagai bahan perpustakaan digital online (e-Resources) seperti jurnal , ebook, dan karya-karya referensi online lainnya. Setiap anggota E-Repository yang telah memiliki nomor anggota yang sah, berhak memanfaatkan layanan koleksi digital online yang kami langgan (e-Resources).</b></p>
-						</div>
+					<div class="container text-center">
+						<p class="lead"><b>Untuk memenuhi kebutuhan pemustaka, kami menyediakan berbagai bahan perpustakaan digital online (e-Resources) seperti jurnal , ebook, dan karya-karya referensi online lainnya. Setiap anggota E-Repository yang telah memiliki nomor anggota yang sah, berhak memanfaatkan layanan koleksi digital online yang kami langgan (e-Resources).</b></p>
+					</div>
 
-						<br><br><br><br>
+					<br><br><br><br>
 
-						<div class="titleheader">
-							<h3 class="h2header text-center">Buku Terbaru</h3>
-							<h5 class="h5link text-center"><a href="{% url 'bukus' %}">Lihat Semua</a></h5>
-						</div>
-						<div class="regulara sliderzx">
-							{% for item in newbooks %}
-							<div class="book-wrapper text-center">
-								<div class="coverpage">
-									<img src="{{ item.cover.url }}"/>
-								</div>
-								<a href="{% url 'buku' id=item.id_buku %}">{{ item.jdl_buku|text_short }}</a>
-								<a href="{% url 'pengarang' id=item.pengarang.id_pengarang %}">{{ item.pengarang }}</a>
-								<div class="rating">
-									{{ item.totalrating|averagerating:item.totalreview }}
-									<span class="totalrating">{{ item.totalreview|add:-1 }}</span>
-								</div>
-								<p>Rp. {{ item.harga }}</p>
-								<button class="btn btn-warning" id="addTocart" data-buku-id="{{ item.id_buku }}">
-									<i class="fa fa-shopping-cart"></i> Keranjang
-								</button>
+					<div class="titleheader">
+						<h3 class="h2header text-center">Buku Terbaru</h3>
+						<h5 class="h5link text-center"><a href="{% url 'bukus' %}">Lihat Semua</a></h5>
+					</div>
+					<div class="regulara sliderzx">
+						{% for item in newbooks %}
+						<div class="book-wrapper text-center">
+							<div class="coverpage">
+								<img src="{{ item.cover.url }}"/>
 							</div>
-							{% endfor %}
-						</div>
-						
-						
-						<br><br><br><br>
-
-						<div class="titleheader">
-							<h3 class="h2header text-center">Journal Terbaru</h3>
-							<h5 class="h5link text-center"><a href="{% url 'journals' %}">Lihat Semua</a></h5>
-						</div>
-						<div class="regulara sliderzx text-center">
-							{% for j in newjournal %}
-							<div class="book-wrapper text-center">
-								<div class="coverpage">
-									<img src="{% static 'img/jurnal.png' %}"/>
-								</div>
-								<a href="{% url 'journal' id=j.kd_jurnal %}">{{ j.jdl_jurnal|text_short }}</a>
+							<a href="{% url 'buku' id=item.id_buku %}">{{ item.jdl_buku|text_short }}</a>
+							<a href="{% url 'pengarang' id=item.pengarang.id_pengarang %}">{{ item.pengarang }}</a>
+							<div class="rating">
+								{{ item.totalrating|averagerating:item.totalreview }}
+								<span class="totalrating">{{ item.totalreview|add:-1 }}</span>
 							</div>
-							{% endfor %}
+							<p>Rp. {{ item.harga }}</p>
+							<button class="btn btn-warning" id="addTocart" data-buku-id="{{ item.id_buku }}">
+								<i class="fa fa-shopping-cart"></i> Keranjang
+							</button>
 						</div>
-						
-						<br><br><br><br>
+						{% endfor %}
+					</div>
+					
+					
+					<br><br><br><br>
 
-						<div class="titleheader">
-							<h3 class="h2header text-center">Buku Rekomendasi</h3>
-							<h5 class="h5link text-center"><a href="{% url 'rbooks' %}">Lihat Semua</a></h5>
-						</div>
-						<div class="regulara sliderzx text-center">
-							{% for p in books %}
-							<div class="book-wrapper text-center">
-								<div class="coverpage">
-									<img src="{{ p.image_url }}"/>
-								</div>
-								<a href="{% url 'rbuku' bookid=p.book_id %}">{{ p.original_title|truncatechars:30 }}</a>
-								<a>{{ p.authors|truncatechars:15 }}</a>
-								<div class="rating">
-									{{ p.average_rating|averagerating:1 }}
-								</div>
-
-								<p>Beri Nilai Untuk Buku Ini</p>
-							
-								{% if user.is_authenticated %}
-								<div class='rating-block text-center' id='rating-block-{{ p.book_id }}' onmouseover="rateStart(this)"
-									onclick='rateBook(this)' data-book-id="{{ p.book_id }}">
-									<div class='rateYo text-center' id='rate-{{ p.book_id }}'></div>
-								</div>
-								{% else %}
-								<div class='rating-block btn btn-warning text-center' onclick="location.href='{% url 'signin' %}'">
-									<div id='button-text'>Login
-										</a>
-									</div>
-								</div>
-								{% endif %}
+					<div class="titleheader">
+						<h3 class="h2header text-center">Journal Terbaru</h3>
+						<h5 class="h5link text-center"><a href="{% url 'journals' %}">Lihat Semua</a></h5>
+					</div>
+					<div class="regulara sliderzx text-center">
+						{% for j in newjournal %}
+						<div class="book-wrapper text-center">
+							<div class="coverpage">
+								<img src="{% static 'img/jurnal.png' %}"/>
 							</div>
-							{% endfor %}
+							<a href="{% url 'journal' id=j.kd_jurnal %}">{{ j.jdl_jurnal|text_short }}</a>
 						</div>
+						{% endfor %}
+					</div>
+					
+					<br><br><br><br>
+
+					<div class="titleheader">
+						<h3 class="h2header text-center">Buku Rekomendasi</h3>
+						<h5 class="h5link text-center"><a href="{% url 'rbooks' %}">Lihat Semua</a></h5>
+					</div>
+					<div class="regulara sliderzx text-center">
+						{% for p in books %}
+						<div class="book-wrapper text-center">
+							<div class="coverpage">
+								<img src="{{ p.image_url }}"/>
+							</div>
+							<a href="{% url 'rbuku' bookid=p.book_id %}">{{ p.original_title|truncatechars:30 }}</a>
+							<a>{{ p.authors|truncatechars:15 }}</a>
+							<div class="rating">
+								{{ p.average_rating|averagerating:1 }}
+							</div>
+
+							<p>Beri Nilai Untuk Buku Ini</p>
+						
+							{% if user.is_authenticated %}
+							<div class='rating-block text-center' id='rating-block-{{ p.book_id }}' onmouseover="rateStart(this)"
+								onclick='rateBook(this)' data-book-id="{{ p.book_id }}">
+								<div class='rateYo text-center' id='rate-{{ p.book_id }}'></div>
+							</div>
+							{% else %}
+							<div class='rating-block btn btn-warning text-center' onclick="location.href='{% url 'signin' %}'">
+								<div id='button-text'>Login
+									</a>
+								</div>
+							</div>
+							{% endif %}
+						</div>
+						{% endfor %}
 					</div>
 				</div>
 				<br>	

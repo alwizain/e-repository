@@ -8,53 +8,97 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-sm-2">
-        <div class="product-information">
+    <div class="col-sm-2 border-right">
+        <div class="container">
+            <form action="{% url 'search:searchj' %}" method="GET">
+                <div class="input-group search_box" style="width: 200px;">
+                    <input class="form-control" type="searchj" placeholder="Cari Jurnal" name="j" value="{{searchj}}">
+                    <button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><h5><b>Kategori Journal</b></h5></li>
+                <div class="border border-bottom"></div>
                 {% for get_kategori in catj %}
                 <li class="kategori_menu list-group-item"><a href="{% url 'kategorij' id=get_kategori.id_kategorij %}">{{get_kategori.nama_kategori}}</a></li>
                 {% endfor %}
-                
             </ul>
         </div>
     </div>
 
     <div class="col-sm-10">
-        <div class="product-information">
-            
-            <div class="container">
-        
-                <table class="table table-hover">
-                <thead>
+        <div class="container">
+            {% if journals|length > 0 %}
+            <table class="table table-hover">
+            <thead>
+                <tr>
+                <th scope="col"></th>
+                <th scope="col">Judul</th>
+                <th scope="col">Abstrak</th>
+                <th scope="col">Pengarang</th>
+                <th scope="col"></th>
+                </tr>
+            </thead>
+            {% endif %}	
+
+            <tbody>
+
+                {% for get_journal in journals %}
                     <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Judul</th>
-                    <th scope="col">Abstract</th>
-                    <th scope="col">Pengarang</th>
-                    <th scope="col"></th>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td><a href="{% url 'journal' id=get_journal.kd_jurnal %}">{{get_journal.jdl_jurnal}}</a></td>
+                    <td>{{get_journal.abstract|abstrak_short}}...</td>
+                    <td>{{get_journal.pengarang}}</td>
+                    <td>
+                        <a href="{{get_journal.file.url}}" download="{{get_journal.file.url}}">Pdf</a>
+                    </td>
                     </tr>
-                </thead>
+                {% endfor %}
 
-                <tbody>
+            </tbody>
 
-                    {% for get_journal in journals %}
-                        <tr>
-                        <th scope="row">{{forloop.counter}}</th>
-                        <td><a href="{% url 'journal' id=get_journal.kd_jurnal %}">{{get_journal.jdl_jurnal}}</a></td>
-                        <td>{{get_journal.abstract|abstrak_short}}...</td>
-                        <td>{{get_journal.pengarang}}</td>
-                        <td>
-                            <a href="{{get_journal.file.url}}" download="{{get_journal.file.url}}">Pdf</a>
-                        </td>
-                        </tr>
-                    {% endfor %}
-
-                </tbody>
-
-                </table>
-            </div>
+            </table>
         </div>
+
+        {% if journals|length > 0 %}
+        <div class="d-pagination">
+            <ul class="pagination">
+            {% if journals.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1">First</a>
+                </li>								
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ journals.previous_page_number }}">Previous</a>
+                </li>
+            {% endif %}
+            {% for ord in journals.paginator.page_range %}
+                {% if journals.number == ord %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ ord }}
+                            <span class="sr-only">(current)</span>
+                        </span>
+                    </li>
+                {% elif ord > journals.number|add:'-3' and ord < journals.number|add:'3' %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ ord }}">{{ ord }}</a>
+                    </li>
+
+                {% endif %}
+
+            {% endfor %}
+            {% if journals.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ journals.next_page_number }}">Next</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ journals.paginator.num_pages }}">Last</a>
+                </li>
+            {% endif %}
+            </ul>
+        </div>
+        {% else %}
+        <h3 class="text-center mt-5">Pencarian tidak ditemukan.</h3>
+        {% endif %}	
     </div>
 </div>
 <br><br>

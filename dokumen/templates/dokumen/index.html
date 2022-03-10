@@ -8,55 +8,53 @@
 {% block content %}
 <div class="container-fluid">
     <div class="row">
-    	<div class="col-sm-2">
-			<div class="product-information">
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item"><h5><b>Resources</b></h5></li>
-					<li class="layanan_menu list-group-item"><a href="{% url 'bukus' %}">Buku</a></li>
-					<li class="layanan_menu list-group-item"><a href="{% url 'journals' %}">Jurnal</a></li>
-				</ul>
-				<br>
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item"><h5><b>Layanan Lainnya</b></h5></li>
-					<li class="layanan_menu list-group-item"><a href="/panduan">Panduan</a></li>
-					<li class="layanan_menu list-group-item"><a href="/bantuan">Bantuan</a></li>
-				</ul>
-			</div>
+    	<div class="col-sm-2 border-right">
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item"><h5><b>Resources</b></h5></li>
+				<div class="border border-bottom"></div>
+				<li class="layanan_menu list-group-item"><a href="{% url 'bukus' %}">Buku</a></li>
+				<li class="layanan_menu list-group-item"><a href="{% url 'journals' %}">Jurnal</a></li>
+			</ul>
+			<br>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item"><h5><b>Layanan Lainnya</b></h5></li>
+				<div class="border border-bottom"></div>
+				<li class="layanan_menu list-group-item"><a href="/panduan">Panduan</a></li>
+				<li class="layanan_menu list-group-item"><a href="/bantuan">Bantuan</a></li>
+			</ul>
       	</div>
 
       	<div class="col-sm-10">
-			<div class="product-information">
-				<div class="container text-center">
-					<h1 class="display-4"><b>DOKUMEN</b></h1><br>
-				</div>
-				<br>
-				<table class="table table-hover">
-					<thead>
-						<tr>
-						<th scope="col">#</th>
-						<th scope="col">Dokumen</th>
-						<th scope="col">Dokumen</th>
-						<th scope="col">Unduh</th>
-						</tr>
-					</thead>
-
-					<tbody>
-
-						{% for item in dokumen %}
-							<tr>
-							<th scope="row">{{forloop.counter}}</th>
-							<td>{{item.nama_dokumen}}</td>
-							<td>{{item.kategori_dok}}</td>
-							<td>
-								<a href="{{item.file.url}}" download="{{item.file.url}}">Pdf</a>
-							</td>
-							</tr>
-						{% endfor %}
-
-					</tbody>
-
-				</table>
+			<div class="container text-center">
+				<h1 class="display-4"><b>DOKUMEN</b></h1><br>
 			</div>
+			<br>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+					<th scope="col">#</th>
+					<th scope="col">Dokumen</th>
+					<th scope="col">Dokumen</th>
+					<th scope="col">Unduh</th>
+					</tr>
+				</thead>
+
+				<tbody>
+
+					{% for item in dokumen %}
+						<tr>
+						<th scope="row">{{forloop.counter}}</th>
+						<td>{{item.nama_dokumen}}</td>
+						<td>{{item.kategori_dok}}</td>
+						<td>
+							<a href="{{item.file.url}}" download="{{item.file.url}}">Pdf</a>
+						</td>
+						</tr>
+					{% endfor %}
+
+				</tbody>
+
+			</table>
         </div>
 	</div>
 </div>

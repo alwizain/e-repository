@@ -36,6 +36,7 @@ urlpatterns = [
     path('berita/', include('berita.urls')),
     path('cart/', include('cart.urls')),
     path('order/', include('order.urls')),
+    path('search/', include('search.urls')),
     
     #path api
     # path('api/', include(router.urls)),

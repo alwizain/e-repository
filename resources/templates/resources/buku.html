@@ -13,9 +13,16 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="row">
-						<div class="col-sm-2">
+						<div class="col-sm-2 border-right">
+							<form action="{% url 'search:search' %}" method="GET">
+								<div class="input-group search_box" style="width: 200px;">
+									<input class="form-control" type="search" placeholder="Cari Buku" name="q" value="{{search}}">
+									<button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i></button>
+								</div>
+							</form>
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item"><h5><b>Kategori Buku</b></h5></li>
+								<div class="border border-bottom"></div>
 								{% for item in cat %}
 								<li class="kategori_menu list-group-item"><a href="{% url 'kategori' id=item.id_kategori %}">{{ item.nama_kategori }}</a></li>
 								{% endfor %}
@@ -23,9 +30,7 @@
 						</div>
 						<div class="col-sm-2">
 							<div class="grid-item">
-								<div class="view-details" style="cursor:pointer">
-									<img id="product_image" class="lookInsideImg" src="{{ buku.cover.url }}">
-								</div>
+									<img style="width: 200px;" src="{{ buku.cover.url }}">
 							</div>		
 						</div>
 			
@@ -80,8 +85,8 @@
 							   
 							   	<br><br><br>
 							   
-								{% for lreview in rreview %}
 								<h4>Ulasan</h4>
+								{% for lreview in rreview %}
 								<div class="card">
 									<div class="card-body">
 										<img src="{% static 'img/profile.png' %}"/>

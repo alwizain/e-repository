@@ -8,26 +8,23 @@
 {% block content %}
 	<div class="container-fluid">
     <div class="row">
-      <div class="col-sm-2">
-        <div class="product-information">
+      <div class="col-sm-2 border-right">
           <ul class="list-group list-group-flush">
             <li class="list-group-item"><h5><b>Layanan</b></h5></li>
+            <div class="border border-bottom"></div>
             <li class="layanan_menu list-group-item"><a href="{% url 'jam' %}">Jam Operasional</a></li>
             <li class="layanan_menu list-group-item"><a href="{% url 'bukus' %}">Buku</a></li>
             <li class="layanan_menu list-group-item"><a href="{% url 'journals' %}">Jurnal</a></li>
           </ul>
-        </div>
       </div>  
 
       <div class="col-sm-10 text-left">
-        <div class="product-information">
           <div class="container text-center">
             <h1 class="display-4"><b>BERITA</b></h1>
-            <br><br><br>
+            <br>
           </div>
           <div class="d-flex flex-column" id="list-berita">
           </div>
-        </div>
       </div>
       
     </div>
@@ -39,7 +36,7 @@
 <script>
   var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImJ1cmhhbiIsImV4cCI6MTY3NTUyNTI0OSwiZW1haWwiOiJidXJoYW5AbWFpbC5jb20ifQ.RLr6ZHsJW7QWk3mmUI9FIdP9-tNmpY0e7tBQ1kIxTJc'
   function getNews(){
-    axios.get('http://127.0.0.1:8181/api/berita/',{ 
+    axios.get('http://127.0.0.1:8282/api/berita/',{ 
         headers: {"Authorization" : `JWT ${token}`
       } 
     }
@@ -52,13 +49,13 @@
     data.forEach(data => {
       const wrapperContent = document.createElement('div');
       wrapperContent.innerHTML = `
-      <div class="card w-75">
-        <div class="card-body">
-          <a class="card-title" href="https://localhost:8000/berita/${data.id}"><h3>${data.judul_berita}</h3></a>
-          <p class="card-text">${data.headline}</p>
-          <p class="card-text"><small class="text-muted">${data.tanggal_upload}</small></p>
-        </div>
-      </div><br>
+      
+          <a href="https://localhost:8000/berita/${data.id}"><h4>${data.judul_berita}</h4></a>
+          <p>${data.headline}</p>
+          <p><small class="text-muted">${data.tanggal_upload}</small></p>
+          <br>
+          <div class="dropdown-divider"></div>
+          <br>
       `
       document.getElementById("list-berita").appendChild(wrapperContent);
     })

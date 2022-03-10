@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'bantuan',
     'jam',
     'berita',
+    'search',
 ]
 
 MIDDLEWARE = [

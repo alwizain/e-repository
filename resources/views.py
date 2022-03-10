@@ -196,7 +196,7 @@ def get_buku(request, id):
 
 def get_bukus(request):
     bukus_ = Buku.objects.all().order_by('-created')
-    paginator = Paginator(bukus_, 10)
+    paginator = Paginator(bukus_, 20)
     page = request.GET.get('page')
     bukus = paginator.get_page(page)
     categories = Kategori.objects.all()
@@ -216,7 +216,7 @@ def get_bukus(request):
 
 def get_buku_kategori(request, id):
     buku_ = Buku.objects.filter(kategori_id=id)
-    paginator = Paginator(buku_, 10)
+    paginator = Paginator(buku_, 20)
     page = request.GET.get('page')
     buku = paginator.get_page(page)
     categories = Kategori.objects.all()

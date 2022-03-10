@@ -10,21 +10,21 @@
 	<div class="container-fluid">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-sm-2">
-					<div class="product-information">
+				<div class="col-sm-2 border-right">
+					<div class="container">
 						<ul class="list-group list-group-flush">
 							<li class="list-group-item"><h5><b>Kategori Jurnal</b></h5></li>
+							<div class="border border-bottom"></div>
 							{% for get_kategori in kategori %}
-							<li class="kategori_menu list-group-item"><a href="">{{get_kategori.nama_kategori}}</a></li>
+							<li class="kategori_menu list-group-item"><a href="{% url 'kategorij' id=get_kategori.id_kategorij %}">{{get_kategori.nama_kategori}}</a></li>
 							{% endfor %}
-							
 						</ul>
 					</div>
 				</div>
 
 	
 				<div class="col-sm-8">
-					<div class="product-information">
+					<div class="container">
 						<h4><b>{{jurnal.jdl_jurnal}}</b></h4>
 						<p>
 							<a href="">{{ jurnal.nama_kategori }} </a>
@@ -43,12 +43,18 @@
 							{{jurnal.refrensi}}	
 						<br><br>
 						<i class="fa fa-calendar"> {{jurnal.created}}</i>
-
 					</div>
 					<br><br>
 				</div>
-				<div class="col-sm-2">
-					<div class="pricebox">
+				<div class="col-sm-2 border-left">
+					<div class="container">
+						<form action="{% url 'search:searchj' %}" method="GET">
+							<div class="input-group search_box" style="width: 200px;">
+								<input class="form-control" type="searchj" placeholder="Cari Jurnal" name="j" value="{{searchj}}">
+								<button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i></button>
+							</div>
+						</form>
+						<div class="dropdown-divider"></div>
 						<h5><b>Unduh Jurnal</b></h5>
 						<div class="btn-group">
 							<a href="{{jurnal.file.url}}" download="{{jurnal.file.url}}" class="btn btn-info"> Unduh Pdf </a>

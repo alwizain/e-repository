@@ -9,7 +9,7 @@ register = template.Library()
 
 @register.filter(name='text_short')
 def text_short(value):
-	temp = value[0:20]
+	temp = value[0:10]
 	return temp
 
 @register.filter(name='abstrak_short')

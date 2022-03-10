@@ -10,12 +10,12 @@
 {% block content %}
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-2">
-      <div class="product-information">
+    <div class="col-sm-2 border-right">
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <h5><b>Resources</b></h5>
           </li>
+          <div class="border border-bottom"></div>
           <li class="layanan_menu list-group-item">
             <a href="{% url 'bukus' %}">Buku</a>
           </li>
@@ -28,6 +28,7 @@
           <li class="list-group-item">
             <h5><b>Layanan Lainnya</b></h5>
           </li>
+          <div class="border border-bottom"></div>
           <li class="layanan_menu list-group-item">
             <a href="/dokumen">Dokumen</a>
           </li>
@@ -35,11 +36,9 @@
             <a href="/bantuan">Bantuan</a>
           </li>
         </ul>
-      </div>
     </div>
 
     <div class="col-sm-10">
-      <div class="product-information">
         <div class="row">
           <div class="class col-md">
             <div class="row-sm text-start">
@@ -111,7 +110,6 @@
             </div>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </div>
