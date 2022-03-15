@@ -20,6 +20,8 @@ urlpatterns = [
 	path('rbooks/', views.get_rbooks, name="rbooks"),
 	path('rkategori/<genre>', views.get_genre_books, name="rkategori"),
 	path('recommendations/', views.book_recommendations, name='book_recommendations'),
+	path('recommen/', views.recommendations, name='recommendations'),
+
 ]
 if settings.DEBUG:
 	urlpatterns+=static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

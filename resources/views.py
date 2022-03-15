@@ -394,9 +394,9 @@ def book_recommendations(request):
     random.shuffle(user_ratings)
     best_user_ratings = sorted(user_ratings, key=operator.attrgetter('bookrating'), reverse=True)
 
-    if len(best_user_ratings) < 4:
-        messages.info(request, 'Please rate atleast 5 books')
-        return redirect('index')
+    if len(best_user_ratings) < 3:
+        messages.info(request, 'Mohon melakukan rating terlebih dahulu dengan minimal 3 buku')
+        return redirect('rbooks')
     if best_user_ratings:
         # If one or more book is rated
         bookid = best_user_ratings[0].bookid
@@ -413,7 +413,7 @@ def book_recommendations(request):
         best_bookids = combine_ids(tfidf_bookids, embedding_bookids, already_rated_books)
         all_books_dict = get_book_dict(best_bookids)
     else:
-        return redirect('index')
+        return redirect('rbooks')
 
     context = {
         'subjudul' : "Rekomendasi Buku",
@@ -427,6 +427,40 @@ def book_recommendations(request):
 		]
     }
     return render(request, 'resources/recommendation.html', context)
+
+def recommendations(request):
+    '''
+        View to render book recommendations
+
+        Count Vectorizer Approach:
+            1. Get Ratings of User
+            2. Shuffle by Top Ratings(For Randomness each time)
+            3. Recommend according to Top Rated Book
+    '''
+    user_ratings = list(UserRating.objects.filter(user=request.user).order_by('-bookrating'))
+    random.shuffle(user_ratings)
+    best_user_ratings = sorted(user_ratings, key=operator.attrgetter('bookrating'), reverse=True)
+
+    if best_user_ratings:
+        # If one or more book is rated
+        bookid = best_user_ratings[0].bookid
+        already_rated_books = get_rated_bookids(user_ratings)
+        # Get bookids based on TF-IDF weighing
+        tfidf_bookids = set(tfidf_recommendations(bookid))
+
+        # Shuffle again for randomness for second approach
+        random.shuffle(user_ratings)
+        best_user_ratings = sorted(user_ratings, key=operator.attrgetter('bookrating'), reverse=True)
+        # Get Top 10 bookids based on embedding
+        embedding_bookids = set(embedding_recommendations(best_user_ratings))
+
+        best_bookids = combine_ids(tfidf_bookids, embedding_bookids, already_rated_books)
+        all_books_dict = get_book_dict(best_bookids)
+    else:
+        print("data kosong")
+    
+    
+    return HttpResponse(all_books_dict)
 
 
 

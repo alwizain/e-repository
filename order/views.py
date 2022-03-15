@@ -94,6 +94,11 @@ def order_list(request):
 
 	return render(request, 'order/list.html', context)
 
+def order_delete(request, id):
+    ordel = Pembelian.objects.get(kd_transaksi=id)
+    ordel.delete()
+    return redirect('order_list')
+
 def order_details(request, id):
 	order_summary = get_object_or_404(Pembelian, kd_transaksi=id)
 

@@ -103,6 +103,41 @@
 								<br>
 								{% endfor %}
 							</div>
+								<div class="d-pagination">
+									<ul class="pagination">
+									{% if rreview.has_previous %}
+										<li class="page-item">
+											<a class="page-link" href="?page=1">First</a>
+										</li>								
+										<li class="page-item">
+											<a class="page-link" href="?page={{ rreview.previous_page_number }}">Previous</a>
+										</li>
+									{% endif %}
+									{% for ord in rreview.paginator.page_range %}
+										{% if rreview.number == ord %}
+											<li class="page-item active">
+												<span class="page-link">{{ ord }}
+													<span class="sr-only">(current)</span>
+												</span>
+											</li>
+										{% elif ord > rreview.number|add:'-3' and ord < rreview.number|add:'3' %}
+											<li class="page-item">
+												<a class="page-link" href="?page={{ ord }}">{{ ord }}</a>
+											</li>
+			
+										{% endif %}
+			
+									{% endfor %}
+									 {% if rreview.has_next %}
+										<li class="page-item">
+											<a class="page-link" href="?page={{ rreview.next_page_number }}">Next</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="?page={{ rreview.paginator.num_pages }}">Last</a>
+										</li>
+									{% endif %}
+									</ul>
+								</div>		
 						</div>
 						<div class="col-sm-2">
 							<div class="pricebox">
@@ -135,44 +170,6 @@
 						</div>
 						{% endfor %}
 					</div>
-				</div>
-					
-				<div class="col-sm-9 mt-5" id="getreview">
-					<div class="d-pagination">
-					    <ul class="pagination">
-						{% if rreview.has_previous %}
-							<li class="page-item">
-								<a class="page-link" href="?page=1">First</a>
-							</li>								
-							<li class="page-item">
-								<a class="page-link" href="?page={{ rreview.previous_page_number }}">Previous</a>
-							</li>
-						{% endif %}
-						{% for ord in rreview.paginator.page_range %}
-							{% if rreview.number == ord %}
-								<li class="page-item active">
-									<span class="page-link">{{ ord }}
-										<span class="sr-only">(current)</span>
-									</span>
-								</li>
-							{% elif ord > rreview.number|add:'-3' and ord < rreview.number|add:'3' %}
-								<li class="page-item">
-									<a class="page-link" href="?page={{ ord }}">{{ ord }}</a>
-								</li>
-
-							{% endif %}
-
-						{% endfor %}
-						 {% if rreview.has_next %}
-							<li class="page-item">
-								<a class="page-link" href="?page={{ rreview.next_page_number }}">Next</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="?page={{ rreview.paginator.num_pages }}">Last</a>
-							</li>
-						{% endif %}
-					    </ul>
-					</div>		
 				</div>
 			</div>
 		</div>
