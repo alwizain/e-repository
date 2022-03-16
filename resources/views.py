@@ -390,13 +390,15 @@ def book_recommendations(request):
             2. Shuffle by Top Ratings(For Randomness each time)
             3. Recommend according to Top Rated Book
     '''
+    ratingbooks = popular_among_users()
     user_ratings = list(UserRating.objects.filter(user=request.user).order_by('-bookrating'))
     random.shuffle(user_ratings)
     best_user_ratings = sorted(user_ratings, key=operator.attrgetter('bookrating'), reverse=True)
 
-    if len(best_user_ratings) < 3:
-        messages.info(request, 'Mohon melakukan rating terlebih dahulu dengan minimal 3 buku')
+    if len(best_user_ratings) < 1:
+        messages.info(request, 'Mohon rating minimal 1 buku terlebih dahulu!')
         return redirect('rbooks')
+
     if best_user_ratings:
         # If one or more book is rated
         bookid = best_user_ratings[0].bookid
@@ -418,6 +420,7 @@ def book_recommendations(request):
     context = {
         'subjudul' : "Rekomendasi Buku",
         'books': all_books_dict,
+        'ratingbooks' : ratingbooks,
         'nav' : [
 			['nav-link','/', 'Home'],
 			['nav-link', '/resources', 'Resources'],

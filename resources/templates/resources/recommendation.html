@@ -12,6 +12,33 @@
 			<div class="row">
 				<div class = 'col-sm-12 text-center'>
                     <div class="titleheader">
+						<h3 class="h2header text-center">Buku Terpopuler</h3>
+					</div>
+					<div class="regulara sliderzx text-center">
+						{% for p in ratingbooks %}
+						<div class="book-wrapper text-center">
+							<div class="coverpage">
+								<img src="{{ p.image_url }}"/>
+							</div>
+							<a href="{% url 'rbuku' bookid=p.book_id %}">{{ p.original_title|truncatechars:30 }}</a>
+							<a>{{ p.authors|truncatechars:15 }}</a>
+							<div class="rating">
+								{{ p.average_rating|averagerating:1 }}
+							</div>
+
+							<p>Beri Nilai Untuk Buku Ini</p>
+						
+							<div class='rating-block text-center' id='rating-block-{{ p.book_id }}' onmouseover="rateStart(this)"
+								onclick='rateBook(this)' data-book-id="{{ p.book_id }}">
+								<div class='rateYo text-center' id='rate-{{ p.book_id }}'></div>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+
+                    <br><br>
+
+                    <div class="titleheader">
 						<h3 class="h2header text-center">Rekomendasi Buku Untuk Kamu</h3>
 					</div>
                     <br>

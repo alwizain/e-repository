@@ -53,7 +53,7 @@ def order_create(request):
 					"payable": int(order.payable),
 					"nama": order.nama,
 					"nama_belakang": order.nama_belakang,
-					"instansi": order.instansi,
+					"asal_institusi": order.asal_institusi,
 					"email": order.email,
 					"telepon": order.telepon
 				}

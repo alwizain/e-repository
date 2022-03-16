@@ -294,7 +294,7 @@ def get_book_dict(bookid_list):
     return rec_books_dict
 
 
-def combine_ids(tfidf_bookids, embedding_bookids, already_rated, recommendations=10):
+def combine_ids(tfidf_bookids, embedding_bookids, already_rated, recommendations=100):
     """Return best bookids combining both approaches.
 
         Embedding - Top 6

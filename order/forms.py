@@ -5,4 +5,4 @@ class OrderCreateForm(forms.ModelForm):
 	
 	class Meta:
 		model = Pembelian
-		fields = ['nama', "nama_belakang", 'email', 'telepon', 'instansi']
+		fields = ['nama', "nama_belakang", 'email', 'telepon', 'asal_institusi']

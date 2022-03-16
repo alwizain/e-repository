@@ -12,7 +12,7 @@ class Pembelian(models.Model):
 	nama_belakang = models.CharField(max_length=30)
 	email = models.EmailField()
 	telepon = models.CharField(max_length=16)
-	instansi = models.CharField(max_length=150)
+	asal_institusi = models.CharField(max_length=150)
 	payable = models.IntegerField()
 	total_buku = models.IntegerField()
 	tgl_transaksi = models.DateTimeField(default=datetime.now, blank=True)
